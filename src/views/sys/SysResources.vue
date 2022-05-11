@@ -21,7 +21,7 @@
               :tree-data="resourcesData"
               defaultExpandAll
               v-model:checkedKeys="checkedKeys"
-              :replace-fields="{
+              :fieldNames="{
               title: 'name',
               key: 'id',
             }"
@@ -53,7 +53,7 @@
                   :tree-data="[{id:0,name:'顶级菜单',pid:0,children:resourcesData}]"
                   placeholder="选择所属上级机构"
                   :treeDefaultExpandedKeys="[0]"
-                  :replace-fields="{title: 'name', key: 'id', value:'id'}"
+                  :fieldNames="{title: 'name', key: 'id', value:'id'}"
               >
               </a-tree-select>
             </a-form-item>
@@ -87,7 +87,7 @@
               <a-input-group style="margin-bottom: 10px" v-for="(item,index) in treeValue.permissions" :key="index" compact>
                 <a-input style="width: 21%" placeholder="权限名称" v-model:value="item.name" />
                 <a-input style="width: 21%" placeholder="权限代码" v-model:value="item.code" />
-                <a-select  style="width: 50%" placeholder="选择接口" mode="multiple" v-model:value="item.apis">
+                <a-select style="width: 50%" placeholder="选择接口" mode="multiple" v-model:value="item.apis">
                   <a-select-option v-for="(api) in methodAll" :value="api.url" :key="api.url">{{ api.url }}</a-select-option>
                 </a-select>
                 <MinusCircleOutlined
@@ -122,7 +122,7 @@
               :tree-data="[{id:0,name:'顶级菜单',pid:0,children:resourcesData}]"
               placeholder="选择所属上级机构"
               :treeDefaultExpandedKeys="[0]"
-              :replace-fields="{title: 'name', key: 'id', value:'id'}"
+              :fieldNames="{title: 'name', key: 'id', value:'id'}"
           >
           </a-tree-select>
         </a-form-item>

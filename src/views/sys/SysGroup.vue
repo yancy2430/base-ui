@@ -2,7 +2,7 @@
   <section>
     <a-row type="flex" :gutter="[16,16]">
       <a-col flex="320px">
-        <a-card size="small" title="组织机构" style="height: 100%">
+        <a-card size="small" title="用户组" style="height: 100%">
           <template #extra>
             <a-tag class="tag-click" color="#2db7f5" @click="onAddGroup">新增</a-tag>
             <a-popconfirm
@@ -16,24 +16,17 @@
             </a-popconfirm>
           </template>
           <a-tree
-              :show-icon="true"
+              :show-icon="false"
               :show-line="true"
               v-if="groupData.length"
               :tree-data="groupData"
               defaultExpandAll
               v-model:checkedKeys="checkedKeys"
-              :replace-fields="{
-              title: 'name',
-              key: 'id',
-            }"
+              :fieldNames="{title: 'name',key: 'id'}"
               @select="selectTree"
           >
-
-            <template #group>
-              <TeamOutlined/>
-            </template>
-            <template #role>
-              <UserOutlined/>
+            <template #title="{ dataRef }">
+              <TeamOutlined v-if="dataRef.type==0"/><UserOutlined v-if="dataRef.type==1"/>{{ dataRef.name }}
             </template>
           </a-tree>
         </a-card>
@@ -60,13 +53,19 @@
             <a-form-item label="归属">
               <a-tree-select
                   v-model:value="itemForm.pid"
+                  show-search
                   style="width: 100%"
-                  :tree-data="[{id:0,name:'顶级菜单',pid:0,children:groupData}]"
+                  :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
                   placeholder="选择所属上级机构"
                   :treeDefaultExpandedKeys="[0]"
-                  :replace-fields="{title: 'name', key: 'id', value:'id'}"
-              >
-              </a-tree-select>
+                  tree-default-expand-all
+                  :tree-data="[{id:0,name:'顶级菜单',pid:0,children:groupData}]"
+                  :field-names="{
+                    children: 'children',
+                    label: 'name',
+                    value: 'id',
+                  }"
+              ></a-tree-select>
             </a-form-item>
             <a-form-item label="权限">
               <a-tree
@@ -79,7 +78,7 @@
                   autoExpandParent
                   defaultExpandAll
                   :tree-data="resourcesData"
-                  :replace-fields="{title: 'name',key: 'code', value:'code'}"
+                  :field-names="{title: 'name',key: 'code', value:'code'}"
               >
               </a-tree>
             </a-form-item>
@@ -148,17 +147,6 @@ export default {
     },
     getGroupList() {
       sysGroupList().then(res => {
-        for (let i = 0; i < res.data.length; i++) {
-          if (res.data[i].type === 1) {
-            res.data[i].slots = {
-              icon: 'role',
-            }
-          } else {
-            res.data[i].slots = {
-              icon: 'group',
-            }
-          }
-        }
         this.groupData = toTree(res.data)
       })
     },

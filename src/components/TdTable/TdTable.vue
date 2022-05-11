@@ -91,7 +91,7 @@
         </template>
       </a-table-column>
     </a-table>
-    <a-modal v-if="$slots['AddItem']" title="新增" v-model:visible="visible.addItem" autoFocusButton="ok" @ok="onAddItem" destroyOnClose>
+    <a-modal wrapClassName="autoWidth" v-if="$slots['AddItem']" title="新增" v-model:visible="visible.addItem" autoFocusButton="ok" @ok="onAddItem" destroyOnClose>
       <a-form
           name="addItem"
           ref="addItem"
@@ -403,5 +403,11 @@ export default {
 .table-search .long-value {
   width: auto;
 }
-
+.autoWidth .ant-modal{
+  display: flex;
+  align-content: center;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-items: center;
+}
 </style>

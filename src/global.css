@@ -97,17 +97,9 @@
 .ant-card-small > .ant-card-head > .ant-card-head-wrapper > .ant-card-extra {
   padding: 7px 0;
 }
-.ant-input {
-  font-size: 13px;
-  line-height: 1.5;
-}
 .tag-btn{
   cursor: pointer;
   margin-bottom: 1px;margin-top: 1px;
-}
-.ant-select:not(.ant-select-customize-input) .ant-select-selector{
-  height: 29px;
-  line-height: 29px;
 }
 
 .table-search{
