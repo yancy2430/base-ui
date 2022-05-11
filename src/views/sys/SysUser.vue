@@ -4,6 +4,7 @@
         title="管理账号"
         ref="table"
         :add-item-ok="parameter=>sysUserSave(parameter)"
+        :edit-item-ok="parameter=>sysUserSave(parameter)"
         :delete-item-ok="parameter=>sysUserRemoveById(parameter)"
         :data-source="parameter=>sysUserPage(parameter)">
       <template #Search="{formState}">
@@ -41,52 +42,40 @@
         <a-row style="width: 800px" :gutter="[16,0]">
           <a-col :span="12">
             <a-form-item
-                label="姓名"
+                label="用户姓名"
                 name="name"
-                :rules="[{ required: true, message: 'Please input your username!' }]">
+                :rules="[{ required: true, message: '姓名不能为空!' }]">
               <a-input v-model:value="formState.name" />
             </a-form-item>
           </a-col>
           <a-col :span="12">
             <a-form-item
-                label="账号"
+                label="登录账号"
                 name="username"
-                :rules="[{ required: true, message: 'Please input your username!' }]">
+                :rules="[{ required: true, message: '账号不能为空!' }]">
               <a-input v-model:value="formState.username" />
             </a-form-item>
           </a-col>
           <a-col :span="12">
             <a-form-item
-                label="电话"
+                label="联系号码"
                 name="phone"
-                :rules="[{ required: true, message: 'Please input your username!' }]">
+                :rules="[{ required: true, message: '电话不能为空!' }]">
               <a-input v-model:value="formState.phone" />
             </a-form-item>
           </a-col>
           <a-col :span="12">
             <a-form-item
-                label="邮箱"
+                label="联系邮箱"
                 name="email"
-                :rules="[{ required: true, message: 'Please input your username!' }]">
+                :rules="[{ required: true, message: '邮箱不能为空!' }]">
               <a-input v-model:value="formState.email" />
             </a-form-item>
           </a-col>
           <a-col :span="12">
             <a-form-item
-                label="状态"
-                name="state"
-                :rules="[{ required: true, message: 'Please input your username!' }]"
-            >
-              <a-radio-group v-model:value="formState.state" button-style="solid">
-                <a-radio-button value="禁用">禁用</a-radio-button>
-                <a-radio-button value="启用">启用</a-radio-button>
-              </a-radio-group>
-            </a-form-item>
-          </a-col>
-          <a-col :span="12">
-            <a-form-item
-                label="角色"
-                :rules="[{ required: true, message: 'Please input your username!' }]"
+                label="用户角色"
+                :rules="[{ required: true, message: '请先分配角色!' }]"
                 name="groupId">
               <a-tree-select
                   v-model:value="formState.groupId"
@@ -102,9 +91,105 @@
               </a-tree-select>
             </a-form-item>
           </a-col>
+          <a-col :span="12">
+            <a-form-item
+                label="初始密码"
+                name="password"
+                :rules="[{ required: true, message: '请输入初始密码!' }]"
+            >
+              <a-input-password v-model:value="formState.password" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-item
+                label="账号状态"
+                name="state"
+                :rules="[{ required: true, message: 'Please input your username!' }]"
+            >
+              <a-radio-group v-model:value="formState.state" button-style="solid">
+                <a-radio-button value="禁用">禁用</a-radio-button>
+                <a-radio-button value="启用">启用</a-radio-button>
+              </a-radio-group>
+            </a-form-item>
+          </a-col>
         </a-row>
+      </template>
+      <template #EditItem="{formState}">
 
-
+        <a-row style="width: 800px" :gutter="[16,0]">
+          <a-col :span="12">
+            <a-form-item
+                label="用户姓名"
+                name="name"
+                :rules="[{ required: true, message: '姓名不能为空!' }]">
+              <a-input v-model:value="formState.name" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-item
+                label="登录账号"
+                name="username"
+                :rules="[{ required: true, message: '账号不能为空!' }]">
+              <a-input v-model:value="formState.username" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-item
+                label="联系号码"
+                name="phone"
+                :rules="[{ required: true, message: '电话不能为空!' }]">
+              <a-input v-model:value="formState.phone" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-item
+                label="联系邮箱"
+                name="email"
+                :rules="[{ required: true, message: '邮箱不能为空!' }]">
+              <a-input v-model:value="formState.email" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-item
+                label="用户角色"
+                :rules="[{ required: true, message: '请先分配角色!' }]"
+                name="groupId">
+              <a-tree-select
+                  v-model:value="formState.groupId"
+                  :tree-data="groupData"
+                  :fieldNames="{label: 'name', key: 'id', value:'id'}"
+                  show-search
+                  style="width: 100%"
+                  placeholder="选择角色"
+                  allow-clear
+                  multiple
+                  tree-default-expand-all
+              >
+              </a-tree-select>
+            </a-form-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-item
+                label="重置密码"
+                name="password"
+                :rules="[{ required: false, message: '请输入新密码!' }]"
+            >
+              <a-input-password v-model:value="formState.password" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-item
+                label="账号状态"
+                name="state"
+                :rules="[{ required: true, message: 'Please input your username!' }]"
+            >
+              <a-radio-group v-model:value="formState.state" button-style="solid">
+                <a-radio-button value="禁用">禁用</a-radio-button>
+                <a-radio-button value="启用">启用</a-radio-button>
+              </a-radio-group>
+            </a-form-item>
+          </a-col>
+        </a-row>
       </template>
     </td-table>
   </section>

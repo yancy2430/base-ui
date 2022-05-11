@@ -101,7 +101,7 @@
         <slot name="AddItem" :formState="formState.addFormState"></slot>
       </a-form>
     </a-modal>
-    <a-modal v-if="$slots['EditItem']" title="编辑" v-model:visible="visible.editItem" autoFocusButton="ok" @ok="onEditItem" destroyOnClose>
+    <a-modal wrapClassName="autoWidth" v-if="$slots['EditItem']" title="编辑" v-model:visible="visible.editItem" autoFocusButton="ok" @ok="onEditItem" destroyOnClose>
       <a-form
           name="editItem"
           ref="editItem"
