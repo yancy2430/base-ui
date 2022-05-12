@@ -61,11 +61,11 @@
                 <setting-outlined class="table-header-icon"/>
               </a-popover>
             </a-tooltip>
-            <a-tooltip>
+            <a-tooltip v-if="items.length>0">
               <template #title>导入表</template>
               <import-outlined class="table-header-icon"/>
             </a-tooltip>
-            <a-tooltip>
+            <a-tooltip v-if="items.length>0">
               <template #title>下载表</template>
               <download-outlined class="table-header-icon"/>
             </a-tooltip>
@@ -102,14 +102,17 @@
       </a-form>
     </a-modal>
     <a-modal wrapClassName="autoWidth" v-if="$slots['EditItem']" title="编辑" v-model:visible="visible.editItem" autoFocusButton="ok" @ok="onEditItem" destroyOnClose>
-      <a-form
-          name="editItem"
-          ref="editItem"
-          :model="formState.editFormState"
-          autocomplete="off"
-      >
-        <slot name="EditItem" :formState="formState.editFormState"></slot>
-      </a-form>
+      <a-spin :spinning="loadings.editLoad">
+        <a-form
+            name="editItem"
+            ref="editItem"
+            :model="formState.editFormState"
+            autocomplete="off"
+        >
+          <slot name="EditItem" :formState="formState.editFormState"></slot>
+        </a-form>
+      </a-spin>
+
     </a-modal>
   </section>
 </template>
@@ -156,6 +159,14 @@ export default {
         }
       }
     },
+    getItemById: {
+      type: Function,
+      default() {
+        return function (data) {
+
+        }
+      }
+    },
     deleteItemOk: {
       type: Function,
     },
@@ -192,7 +203,6 @@ export default {
   data() {
     let search = Object.assign({}, this.searchData)
     return {
-
       items: [],
       formState: {
         addFormState: {},
@@ -210,6 +220,9 @@ export default {
         emptyText: '暂无数据'
       },
       spinning: false,
+      loadings: {
+        editLoad:false,
+      },
       selectedRowKeys: [],
       data: {
         records: [],
@@ -236,15 +249,20 @@ export default {
   methods: {
     onAddItem(){
       this.$refs.addItem.validateFields().then(values => {
-        this.addItemOk(values)
+        this.addItemOk(values).then(res=>{
+          this.visible.addItem=false;
+          this.loadData()
+        })
       }).catch(info => {
         console.log('Validate Failed:', info);
       });
-
     },
     onEditItem(){
       this.$refs.editItem.validateFields().then(values => {
-        this.editItemOk(values)
+        this.editItemOk(Object.assign({},values,this.formState['editFormState'])).then(res=>{
+          this.visible.editItem=false;
+          this.loadData()
+        })
       }).catch(info => {
         console.log('Validate Failed:', info);
       });
@@ -260,9 +278,19 @@ export default {
           })
     },
     onVisible(visible, formState,record) {
-      console.log(visible, formState,record)
-      this.formState[formState] = Object.assign({},record) || {}
-      this.visible[visible] = true
+      if (visible==='editItem') {
+        this.formState[formState] = {}
+        this.visible[visible] = true
+        this.loadings.editLoad = true
+        this.getItemById(record).then(res=>{
+          this.formState[formState] = res.data
+          this.loadings.editLoad = false
+        })
+      }else {
+        this.formState[formState] = Object.assign({},record) || {}
+        this.visible[visible] = true
+      }
+
     },
     onDrop(dropResult) {
       this.items = this.applyDrag(this.items, dropResult);
@@ -282,17 +310,6 @@ export default {
       }
       return result;
     },
-    optionsConversion(value, options) {
-      if (null === options) {
-        return value
-      }
-      for (let optionsKey in options) {
-        if (options[optionsKey].value === value) {
-          return options[optionsKey].label;
-        }
-      }
-      return value;
-    },
     handleTableChange(pagination, filters, sorter) {
       console.log(sorter)
       if (sorter && sorter.field) {
@@ -307,7 +324,12 @@ export default {
       this.loadData(this.searchForm)
     },
     onSearch() {
-      this.loadData(this.searchForm)
+      this.$refs.searchForm.validateFields().then(values => {
+        this.loadData(values)
+      }).catch(info => {
+        console.log('Validate Failed:', info);
+      });
+
     },
     updateItem(item, key) {
       key = key || 'id';
