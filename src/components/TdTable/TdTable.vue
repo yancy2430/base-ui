@@ -33,7 +33,9 @@
         @change="handleTableChange">
       <template #title>
         <a-row type="flex" style="padding: 5px 0;display: flex;align-items: center;">
-          <a-col flex="200px"><span class="table-title">{{ title }}</span></a-col>
+          <a-col flex="400px"><span class="table-title">{{ title }}</span><slot name="LeftHeader">
+          </slot></a-col>
+
           <a-col class="table-header-right" flex="auto"
                  style="display: flex;align-items: center;justify-content: flex-end;">
             <a-button v-if="$slots['AddItem']" type="primary" size="small" @click="onVisible('addItem','addFormState')">
@@ -72,11 +74,16 @@
           </a-col>
         </a-row>
       </template>
+      <a-table-column title="序号" align="center" >
+        <template #default="{ index}">
+          {{index+1}}
+        </template>
+      </a-table-column>
       <slot name="Columns">
       </slot>
       <a-table-column v-if="$slots['Action'] || deleteItemOk" title="操作" align="center">
         <template #default="{ record }">
-          <slot name="Action">
+          <slot name="Action" :record="record">
           </slot>
           <a v-if="$slots['EditItem']" @click="onVisible('editItem','editFormState',record)">编辑</a>
           <a-divider v-if="$slots['EditItem'] && deleteItemOk" type="vertical"/>
@@ -392,7 +399,7 @@ export default {
 
 .table-title {
   font-size: 15px;
-  margin-left: 10px;
+  margin: 0 15px;
   font-weight: 500;
 }
 

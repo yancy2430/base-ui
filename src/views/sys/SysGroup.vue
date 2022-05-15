@@ -88,6 +88,15 @@
                 <a-radio :value="1">角色</a-radio>
               </a-radio-group>
             </a-form-item>
+            <a-form-item label="职级">
+              <a-radio-group v-model:value="itemForm.level">
+                <a-radio value="普通员工">普通员工</a-radio>
+                <a-radio value="部门主管">部门主管</a-radio>
+                <a-radio value="部门经理">部门经理</a-radio>
+                <a-radio value="总经理">总经理</a-radio>
+                <a-radio value="其他账号">其他账号</a-radio>
+              </a-radio-group>
+            </a-form-item>
             <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
               <a-button type="primary" @click="saveHandleOk" :loading="saveHandleLoading">保存</a-button>
             </a-form-item>
