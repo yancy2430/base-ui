@@ -99,7 +99,7 @@
             <a-form-item
                 label="用户角色"
                 :rules="[{ required: true, message: '请先分配角色!' }]"
-                name="groupId">
+                name="group">
               <a-tree-select
                   v-model:value="formState.group"
                   :tree-data="groupData"

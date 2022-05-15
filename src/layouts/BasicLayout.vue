@@ -1,6 +1,7 @@
 <template>
   <a-layout style="min-height: 100vh">
-    <a-layout-sider :style="{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }" v-model:collapsed="collapsed" collapsible  :width="180">
+    <a-layout-sider :style="{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }"
+                    v-model:collapsed="collapsed" collapsible :width="180">
       <div class="logo"><h1>后台管理系统</h1></div>
       <a-menu
           mode="inline"
@@ -27,19 +28,19 @@
       <a-layout-header class="layout-header">
         <a-row type='flex' style="height: 42px;">
           <a-col flex="60px" class="header-left">
-            <MenuFoldOutlined style="padding: 13px 22px;" class="head-icon" />
+            <MenuFoldOutlined style="padding: 13px 22px;" class="head-icon"/>
           </a-col>
           <a-col flex="auto" class="header-center">
             <multi-tab v-if="false"></multi-tab>
           </a-col>
           <a-col flex="220px" class="header-right">
-            <BellOutlined class="head-icon" />
+            <BellOutlined class="head-icon"/>
             <a-dropdown>
               <a class="ant-dropdown-link" @click.prevent>
                 <a-avatar class="avatar" :size="24">
                   <template #icon><img src="https://xiangshangsl.com/avatar2.jpg"></template>
                 </a-avatar>
-                总管理员
+                {{ userInfo.name }}
               </a>
               <template #overlay>
                 <a-menu>
@@ -52,7 +53,7 @@
                 </a-menu>
               </template>
             </a-dropdown>
-            <ReloadOutlined class="head-icon" />
+            <ReloadOutlined class="head-icon"/>
           </a-col>
         </a-row>
       </a-layout-header>
@@ -67,7 +68,7 @@
 </template>
 
 <script>
-import {defineComponent, ref,reactive} from 'vue';
+import {defineComponent, ref, reactive} from 'vue';
 import {
   PieChartOutlined,
   ReloadOutlined,
@@ -90,6 +91,7 @@ export default defineComponent({
 
     return {
       menus: [],
+      userInfo: {},
       collapsed,
       toggleCollapsed,
     };
@@ -97,21 +99,22 @@ export default defineComponent({
   created() {
     const routes = this.$store.getters.addRouters.find(item => item.path === '/')
     this.menus = (routes && routes.children) || []
-    sysUserInfo().then(res=>{
-      storage.set("userInfo",res.data)
+    sysUserInfo().then(res => {
+      storage.set("userInfo", res.data)
+      this.userInfo = res.data
     })
   },
-  methods:{
-    onSelect(e){
+  methods: {
+    onSelect(e) {
       console.log(e.key)
-      if (e.key){
+      if (e.key) {
         this.$router.push(e.key)
       }
     },
-    logOut(){
-      storage.set("userInfo",null)
+    logOut() {
+      storage.set("userInfo", null)
       storage.remove("userInfo")
-      storage.set("ACCESS_TOKEN",null)
+      storage.set("ACCESS_TOKEN", null)
       storage.remove("ACCESS_TOKEN")
       this.$router.replace("/user/login")
     }

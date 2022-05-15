@@ -20,6 +20,7 @@
       </a-form-item>
     </a-form>
     <a-table
+        ref="table"
         class="table-list"
         size="small"
         :bordered="false"
@@ -31,6 +32,9 @@
         v-bind="$attrs"
         :row-class-name="(_record, index) => (index % 2 === 1 ? 'table-striped' : null)"
         @change="handleTableChange">
+      <template #emptyText>
+        <a-empty :image="simpleImage" :description="locale.errorText" />
+      </template>
       <template #title>
         <a-row type="flex" style="padding: 5px 0;display: flex;align-items: center;">
           <a-col flex="400px"><span class="table-title">{{ title }}</span><slot name="LeftHeader">
@@ -132,6 +136,7 @@ import {
   DownloadOutlined,
   PlusOutlined
 } from '@ant-design/icons-vue';
+import { Empty } from 'ant-design-vue';
 
 import {Container, Draggable} from "vue3-smooth-dnd";
 
@@ -210,6 +215,7 @@ export default {
   data() {
     let search = Object.assign({}, this.searchData)
     return {
+      simpleImage: Empty.PRESENTED_IMAGE_SIMPLE,
       items: [],
       formState: {
         addFormState: {},
@@ -222,9 +228,7 @@ export default {
       searchForm: search,
       addForm: [],
       locale: {
-        filterConfirm: '确定',
-        filterReset: '重置',
-        emptyText: '暂无数据'
+        errorText: ''
       },
       spinning: false,
       loadings: {
@@ -358,18 +362,20 @@ export default {
       this.searchForm = Object.assign(this.searchForm, param)
       this.spinning = true
       this.dataSource(this.searchForm).then(res => {
+        this.data = {}
         if (res.code === 200) {
-          this.locale.emptyText = '暂无数据'
+          this.locale.errorText = undefined
           Object.assign(this.data, res.data)
           this.data.pageSize = res.data.size
           this.data.size = undefined
           this.loadDataComplete(this.data)
         } else {
-          this.locale.emptyText = res.msg
+          this.locale.errorText = res.msg
         }
         success(res)
       }).catch(function (err) {
         error(err)
+        this.locale.errorText = err
       }).finally(() => {
         this.spinning = false
       })

@@ -7,19 +7,19 @@
         @finish="toLogin"
         ref="formRef"
     >
-      <a-form-item has-feedback name="username">
+      <a-form-item name="username">
         <a-input size="large" v-model:value="formData.username" type="text" autocomplete="off">
           <template #prefix>
             <user-outlined/>
           </template>
         </a-input>
       </a-form-item>
-      <a-form-item has-feedback name="password">
-        <a-input size="large" v-model:value="formData.password" type="password" autocomplete="off">
+      <a-form-item name="password">
+        <a-input-password size="large" v-model:value="formData.password" autocomplete="off">
           <template #prefix>
             <LockOutlined/>
           </template>
-        </a-input>
+        </a-input-password>
       </a-form-item>
       <a-input-group size="large">
         <a-row :gutter="16">
@@ -101,8 +101,6 @@ export default {
         console.log(res)
         res.domain = window.document.domain
         this.loginLoading = true
-        res.password = md5(res.password)
-
         sysUserLogin(res).then(result => {
           this.loginLoading = false
           if (result.code === 200) {
