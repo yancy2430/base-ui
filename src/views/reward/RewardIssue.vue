@@ -16,6 +16,9 @@
         <a-form-item label="标题" name="title">
           <a-input v-model:value="formState.title"/>
         </a-form-item>
+        <a-form-item label="状态" name="state">
+          <td-select :showSearch="true" :data-source="searchValue=>enumOption('RewardIssueState')" v-model:value="formState.state"/>
+        </a-form-item>
       </template>
       <template #Columns>
         <a-table-column title="标题" data-index="title" align="center"/>
@@ -152,10 +155,12 @@ import {sysGroupList} from "@/api/SysGroup";
 import {toTree} from "@/utils/util";
 import {rewardCategoryList} from "@/api/RewardCategory";
 import {rewardAuditSave} from "@/api/RewardAudit";
+import {enumOption} from "@/api/Common";
+import TdSelect from "@/components/TdSelect/TdSelect";
 
 export default {
   name: "RewardIssue",
-  components: {TdTable},
+  components: {TdSelect, TdTable},
   data() {
     return {
       searchData:{
@@ -172,6 +177,7 @@ export default {
       rewardIssueSave: rewardIssueSave,
       rewardIssueRemoveById: rewardIssueRemoveById,
       rewardIssueGetById: rewardIssueGetById,
+      enumOption:enumOption,
       groupData:[],
       categoryList:[]
     }
