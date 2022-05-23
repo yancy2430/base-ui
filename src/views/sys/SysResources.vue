@@ -53,7 +53,11 @@
                   :tree-data="[{id:0,name:'顶级菜单',pid:0,children:resourcesData}]"
                   placeholder="选择所属上级机构"
                   :treeDefaultExpandedKeys="[0]"
-                  :fieldNames="{title: 'name', key: 'id', value:'id'}"
+                  :field-names="{
+                    children: 'children',
+                    label: 'name',
+                    value: 'id',
+                  }"
               >
               </a-tree-select>
             </a-form-item>
@@ -122,7 +126,11 @@
               :tree-data="[{id:0,name:'顶级菜单',pid:0,children:resourcesData}]"
               placeholder="选择所属上级机构"
               :treeDefaultExpandedKeys="[0]"
-              :fieldNames="{title: 'name', key: 'id', value:'id'}"
+              :field-names="{
+                    children: 'children',
+                    label: 'name',
+                    value: 'id',
+                  }"
           >
           </a-tree-select>
         </a-form-item>
@@ -152,6 +160,32 @@ import { message } from 'ant-design-vue';
 import { PlusOutlined,MinusCircleOutlined} from '@ant-design/icons-vue';
 const layoutsComponents = require.context('@/layouts', true, /\.vue/)
 const viewsComponents = require.context('@/views', true, /\.vue/)
+function getCode(fileName) {
+  let src = `/src/${fileName}`;
+  /**
+   * <div class="docs-code"></div> 就是展示代码的区域
+   * 至于为什么加
+   <pre><code></code></pre>?
+   * 1、是因为高亮显示使用了 highlight.js插件，这个插件要求
+   <pre><code></code></pre> 之前的代码才会被高亮。
+   * 2、并且因为有了pre标签，所以代码中的空格换行等格式才得以保留。
+   */
+      // 创建一个新的xhr对象
+      // eslint-disable-next-line no-undef
+  let xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+  xhr.open('GET', src);
+  // 指定返回的数据为纯文本格式
+  xhr.responseType = 'text'; // 如果不兼容，可采用 xhr.overrideMimeType('text/plain;charset=utf-8');
+  xhr.send();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      console.log(xhr.responseText)
+    } else {
+      console.log(xhr.responseText)
+
+    }
+  };
+}
 export default {
   name: "Resources",
   data(){
@@ -199,6 +233,11 @@ export default {
   },
   created() {
     this.componentList = layoutsComponents.keys().concat(viewsComponents.keys());
+    console.log(this.componentList)
+    viewsComponents.keys().forEach(item=>{
+      getCode(item)
+    })
+
     this.getResourcesList()
     sysResourcesMethods().then(res=>{
       this.methodAll = res.data
@@ -208,6 +247,7 @@ export default {
     getResourcesList(){
       sysResourcesList().then(res=>{
         this.resourcesData = toTree(res.data)
+        console.log(this.resourcesData)
       })
     },
     confirmDel(){
