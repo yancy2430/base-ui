@@ -63,7 +63,7 @@
             </a-form-item>
             <a-form-item label="类型">
               <a-radio-group v-model:value="treeValue.type">
-                <a-radio :value="0">侧边栏菜单</a-radio>
+                <a-radio :value="0">边栏菜单</a-radio>
                 <a-radio :value="1">操作内页</a-radio>
               </a-radio-group>
             </a-form-item>
@@ -71,41 +71,21 @@
               <a-input v-model:value="treeValue.name" />
             </a-form-item>
             <a-form-item label="组件">
-              <a-select v-model:value="treeValue.component" placeholder="选择绑定的组件">
+              <a-select disabled v-model:value="treeValue.component" placeholder="选择绑定的组件">
                 <a-select-option v-for="(item,index) in componentList" :value="item" :key="index">{{item}}</a-select-option>
               </a-select>
             </a-form-item>
             <a-form-item label="接口">
-              <a-select v-model:value="treeValue.apis" placeholder="选择页面加载所用到接口" mode="multiple">
-                <a-select-option v-for="(item) in methodAll" :value="item.url" :key="item.url">{{ item.url }}</a-select-option>
+              <a-select disabled v-model:value="treeValue.apis" placeholder="选择页面加载所用到接口" mode="tags">
               </a-select>
-            </a-form-item>
-            <a-form-item label="打开方式">
-              <a-radio-group v-model:value="treeValue.open">
-                <a-radio :value="1">新选项卡</a-radio>
-                <a-radio :value="2">当前选项卡</a-radio>
-                <a-radio :value="3">隐藏选项</a-radio>
-              </a-radio-group>
             </a-form-item>
             <a-form-item label="页内权限">
               <a-input-group style="margin-bottom: 10px" v-for="(item,index) in treeValue.permissions" :key="index" compact>
-                <a-input style="width: 21%" placeholder="权限名称" v-model:value="item.name" />
-                <a-input style="width: 21%" placeholder="权限代码" v-model:value="item.code" />
-                <a-select style="width: 50%" placeholder="选择接口" mode="multiple" v-model:value="item.apis">
-                  <a-select-option v-for="(api) in methodAll" :value="api.url" :key="api.url">{{ api.url }}</a-select-option>
+                <a-input disabled style="width: 25%" placeholder="权限名称" v-model:value="item.name" />
+                <a-input disabled style="width: 25%" placeholder="权限代码" v-model:value="item.code" />
+                <a-select disabled style="width: 50%" placeholder="选择接口" mode="tags" v-model:value="item.apis">
                 </a-select>
-                <MinusCircleOutlined
-                    style="width: 8%"
-                    v-if="treeValue.permissions.length > 0"
-                    class="dynamic-delete-button"
-                    :disabled="treeValue.permissions.length === 0"
-                    @click="removeItem(item)"
-                />
               </a-input-group>
-              <a-button type="dashed" style="width: 100%" @click="addItem">
-                <PlusOutlined />
-                新增页面权限
-              </a-button>
             </a-form-item>
             <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
               <a-button :loading="submitConfirmLoading" @click="submitHandleOk" type="primary">保存修改</a-button>
@@ -157,35 +137,8 @@
 import {sysResourcesList, sysResourcesMethods,sysResourcesGetById,sysResourcesSave,sysResourcesRemoveById} from '@/api/SysResources'
 import {toTree} from "@/utils/util";
 import { message } from 'ant-design-vue';
-import { PlusOutlined,MinusCircleOutlined} from '@ant-design/icons-vue';
 const layoutsComponents = require.context('@/layouts', true, /\.vue/)
 const viewsComponents = require.context('@/views', true, /\.vue/)
-function getCode(fileName) {
-  let src = `/src/${fileName}`;
-  /**
-   * <div class="docs-code"></div> 就是展示代码的区域
-   * 至于为什么加
-   <pre><code></code></pre>?
-   * 1、是因为高亮显示使用了 highlight.js插件，这个插件要求
-   <pre><code></code></pre> 之前的代码才会被高亮。
-   * 2、并且因为有了pre标签，所以代码中的空格换行等格式才得以保留。
-   */
-      // 创建一个新的xhr对象
-      // eslint-disable-next-line no-undef
-  let xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-  xhr.open('GET', src);
-  // 指定返回的数据为纯文本格式
-  xhr.responseType = 'text'; // 如果不兼容，可采用 xhr.overrideMimeType('text/plain;charset=utf-8');
-  xhr.send();
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      console.log(xhr.responseText)
-    } else {
-      console.log(xhr.responseText)
-
-    }
-  };
-}
 export default {
   name: "Resources",
   data(){
@@ -228,16 +181,10 @@ export default {
     }
   },
   components:{
-    PlusOutlined,
-    MinusCircleOutlined
   },
   created() {
     this.componentList = layoutsComponents.keys().concat(viewsComponents.keys());
     console.log(this.componentList)
-    viewsComponents.keys().forEach(item=>{
-      getCode(item)
-    })
-
     this.getResourcesList()
     sysResourcesMethods().then(res=>{
       this.methodAll = res.data

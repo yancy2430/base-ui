@@ -10,14 +10,15 @@
         :delete-item-ok="parameter=>rewardIssueRemoveById({id:parameter.id})"
         :data-source="parameter=>rewardIssuePage(parameter)">
       <template #LeftHeader>
-        <a-switch @change="onAudit" v-model:checked="searchData.audit" checked-children="审"  un-checked-children="审" />
+        <a-switch @change="onAudit" v-model:checked="searchData.audit" checked-children="审" un-checked-children="审"/>
       </template>
       <template #Search="{formState}">
-        <a-form-item label="标题" name="title" v-auth:searchTitle="{title:'标题搜索条件',api:[rewardIssuePage,rewardIssueGetById]}">
+        <a-form-item label="标题" name="title" v-auth="{name:'标题搜索条件',apis:[rewardIssuePage,rewardIssueGetById]}">
           <a-input v-model:value="formState.title"/>
         </a-form-item>
         <a-form-item label="状态" name="state">
-          <td-select :showSearch="true" :data-source="searchValue=>enumOption('RewardIssueState')" v-model:value="formState.state"/>
+          <td-select :showSearch="true" :data-source="searchValue=>enumOption('RewardIssueState')"
+                     v-model:value="formState.state"/>
         </a-form-item>
       </template>
       <template #Columns>
@@ -25,7 +26,7 @@
         <a-table-column title="问题描述" data-index="describe" align="center"/>
         <a-table-column title="发布人" data-index="publisher" align="center"/>
         <a-table-column title="发布时间" data-index="publishTime" align="center"/>
-        <a-table-column title="发布群体" data-index="groupText" >
+        <a-table-column title="发布群体" data-index="groupText">
           <template #default="{text}">
             <a-tag v-for="tag in text" :key="tag" color="blue" style="margin: 1px">{{ tag }}</a-tag>
           </template>
@@ -33,7 +34,7 @@
         <a-table-column title="发布板块" data-index="categoryName" align="center" :sorter="true"/>
       </template>
       <template #AddItem="{formState}">
-        <a-row style="width: 600px" :gutter="[16,0]">
+        <a-row style="width: 600px" :gutter="[16,0]"  v-auth="{name:'发布问题',apis:[rewardIssueSave]}">
           <a-col :span="24">
             <a-form-item label="问题标题" name="title"
                          :rules="[{ required: true, message: '请输入标题!' }]">
@@ -44,7 +45,7 @@
             <a-form-item label="问题描述" name="describe"
                          :rules="[{ required: true, message: '请输入问题描述!' }]"
             >
-              <a-textarea v-model:value="formState.describe" placeholder="请输入问题描述" :rows="4" />
+              <a-textarea v-model:value="formState.describe" placeholder="请输入问题描述" :rows="4"/>
             </a-form-item>
           </a-col>
           <a-col :span="24">
@@ -67,7 +68,8 @@
           <a-col :span="24">
             <a-form-item label="发布板块" name="category"
                          :rules="[{ required: true, message: '请选择发布板块!' }]">
-              <a-select v-model:value="formState.category" :options="categoryList" :fieldNames="{ label: 'categoryName', value: 'id' }">
+              <a-select v-model:value="formState.category" :options="categoryList"
+                        :fieldNames="{ label: 'categoryName', value: 'id' }">
               </a-select>
             </a-form-item>
           </a-col>
@@ -85,7 +87,7 @@
             <a-form-item label="问题描述" name="describe"
                          :rules="[{ required: true, message: '请输入问题描述!' }]"
             >
-              <a-textarea v-model:value="formState.describe" placeholder="请输入问题描述" :rows="4" />
+              <a-textarea v-model:value="formState.describe" placeholder="请输入问题描述" :rows="4"/>
             </a-form-item>
           </a-col>
           <a-col :span="24">
@@ -108,14 +110,15 @@
           <a-col :span="24">
             <a-form-item label="发布板块" name="category"
                          :rules="[{ required: true, message: '请选择发布板块!' }]">
-              <a-select v-model:value="formState.category" :options="categoryList" :fieldNames="{ label: 'categoryName', value: 'id' }">
+              <a-select v-model:value="formState.category" :options="categoryList"
+                        :fieldNames="{ label: 'categoryName', value: 'id' }">
               </a-select>
             </a-form-item>
           </a-col>
         </a-row>
       </template>
       <template #Action="{record}">
-        <a v-if="searchData.audit" @click="onAuditShow(record)">审核</a>
+        <a  v-auth="{name:'审核按钮',apis:[rewardAuditSave]}" v-if="searchData.audit" @click="onAuditShow(record)">审核</a>
         <a-divider v-if="searchData.audit" type="vertical"/>
       </template>
     </td-table>
@@ -141,7 +144,7 @@
             name="auditIdea"
             :rules="[{ required: true, message: '请填写审核意见!' }]"
         >
-          <a-textarea v-model:value="formState.audit.auditIdea" />
+          <a-textarea v-model:value="formState.audit.auditIdea"/>
         </a-form-item>
       </a-form>
     </a-modal>
@@ -150,7 +153,7 @@
 
 <script>
 import TdTable from "@/components/TdTable/TdTable";
-import {rewardIssueGetById, rewardIssuePage, rewardIssueRemoveById, rewardIssueSave} from "@/api/RewardIssue";
+import {rewardIssueGetById, rewardIssuePage, rewardIssueRemoveById, rewardIssueSave} from "@/api/RewardIssue"
 import {sysGroupList} from "@/api/SysGroup";
 import {toTree} from "@/utils/util";
 import {rewardCategoryList} from "@/api/RewardCategory";
@@ -163,23 +166,23 @@ export default {
   components: {TdSelect, TdTable},
   data() {
     return {
-      searchData:{
-        audit:false,
+      searchData: {
+        audit: false,
       },
-      visible:{
-        audit:false,
+      visible: {
+        audit: false,
       },
-      formState:{
-        audit:{
-        }
+      formState: {
+        audit: {}
       },
       rewardIssuePage: rewardIssuePage,
       rewardIssueSave: rewardIssueSave,
       rewardIssueRemoveById: rewardIssueRemoveById,
       rewardIssueGetById: rewardIssueGetById,
-      enumOption:enumOption,
-      groupData:[],
-      categoryList:[]
+      rewardAuditSave:rewardAuditSave,
+      enumOption: enumOption,
+      groupData: [],
+      categoryList: []
     }
   },
   created() {
@@ -187,7 +190,7 @@ export default {
     this.getCategoryList()
   },
   methods: {
-    onAudit(value){
+    onAudit(value) {
       this.$refs.table.loadData({audit: value})
     },
     getGroupList() {
@@ -196,25 +199,25 @@ export default {
         console.log(this.groupData)
       })
     },
-    getCategoryList(){
-      rewardCategoryList().then(res=>{
-        this.categoryList=res.data
+    getCategoryList() {
+      rewardCategoryList().then(res => {
+        this.categoryList = res.data
       })
     },
-    onAuditShow(item){//提交审核
-      this.formState.audit={}
-      this.visible.audit=true;
-      this.formState.audit.rewardId=item.id
+    onAuditShow(item) {//提交审核
+      this.formState.audit = {}
+      this.visible.audit = true;
+      this.formState.audit.rewardId = item.id
     },
-    onAuditHandleOk(){//提交审核
+    onAuditHandleOk() {//提交审核
       this.$refs.formAudit.validateFields().then(values => {
-        rewardAuditSave(this.formState.audit).then(res=>{
+        rewardAuditSave(this.formState.audit).then(res => {
           console.log(res)
-          this.visible.audit=false;
+          this.visible.audit = false;
           this.$refs.table.loadData()
         })
       }).catch(info => {
-        this.visible.audit=false;
+        this.visible.audit = false;
         console.log('Validate Failed:', info);
       });
     }

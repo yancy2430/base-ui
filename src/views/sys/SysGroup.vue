@@ -68,19 +68,25 @@
               ></a-tree-select>
             </a-form-item>
             <a-form-item label="权限">
+              <a-checkbox-group v-model:value="itemForm.permissions">
               <a-tree
-                  :selectable="false"
                   v-if="resourcesData.length"
                   checkStrictly
+                  :selectable="false"
                   class="permissions"
-                  v-model:checked-keys="itemForm.permissions"
-                  checkable
                   autoExpandParent
                   defaultExpandAll
                   :tree-data="resourcesData"
                   :field-names="{title: 'name',key: 'code', value:'code'}"
               >
+                <template #title="{ permissions,name,code }">
+                  <a-checkbox :value="code">{{ name }}</a-checkbox>
+                  <div v-if="permissions && permissions.length>0" style="background: #f8f8f8;padding: 3px 5px;margin-left: 24px">
+                    <a-checkbox v-for="item in permissions" :key="item.code"  :value="item.code" style="font-size: 13px">{{ item.name }}</a-checkbox>
+                  </div>
+                </template>
               </a-tree>
+              </a-checkbox-group>
             </a-form-item>
             <a-form-item label="类型">
               <a-radio-group v-model:value="itemForm.type">
@@ -108,11 +114,11 @@
 </template>
 
 <script>
+import { sysResourcesList } from '@/api/SysResources';
+import {sysGroupGetById, sysGroupList, sysGroupRemoveGroupById, sysGroupSubmitGroup} from "@/api/SysGroup";
 import {toTree} from "@/utils/util";
 import {message} from 'ant-design-vue';
-import {sysResourcesList} from '@/api/SysResources'
 import {TeamOutlined, UserOutlined} from '@ant-design/icons-vue';
-import {sysGroupGetById, sysGroupList, sysGroupRemoveGroupById, sysGroupSubmitGroup} from "@/api/SysGroup";
 
 export default {
   name: "Resources",
@@ -124,7 +130,9 @@ export default {
       selectTreeValue: undefined,
       groupData: [],
       resourcesData: [],
-      itemForm: {},
+      itemForm: {
+        select:{},
+      },
       checkedKeys: [],
       labelCol: {
         span: 4,
@@ -147,6 +155,7 @@ export default {
     this.getGroupList()
     sysResourcesList().then(res => {
       this.resourcesData = toTree(res.data)
+      console.log(this.resourcesData)
     })
   },
   methods: {
@@ -178,6 +187,7 @@ export default {
       if (!Array.isArray(this.itemForm.permissions)) {
         this.itemForm.permissions = this.itemForm.permissions.checked
       }
+      console.log(this.itemForm.permissions)
       this.saveHandleLoading = true
       sysGroupSubmitGroup(this.itemForm).then(res => {
         if (res.code === 200) {
