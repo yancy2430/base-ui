@@ -6,20 +6,25 @@ export const store = createStore({
   },
   state () {
     return {
-      addRouters: []
+      addRouters: [],
+      permissions:[]
     }
   },
   mutations: {
     SET_ROUTERS: (state, routers) => {
       state.addRouters = routers
-    }
+    },
+    SET_PERMISSIONS: (state, permissions) => {
+      state.permissions = permissions
+    },
   },
   actions:{
     GenerateRoutes({commit}, data) {
       return new Promise(resolve => {
         const {token} = data
-        generatorDynamicRouter(token).then(routers => {
-          commit('SET_ROUTERS', routers)
+        generatorDynamicRouter(token).then(data => {
+          commit('SET_ROUTERS',data.routers)
+          commit('SET_PERMISSIONS', data.codes)
           resolve()
         })
       })
@@ -38,6 +43,7 @@ export const store = createStore({
     // userInfo: state => state.user.info,
     addRouters: state => state.addRouters,
     // multiTab: state => state.app.multiTab
+    permissions: state => state.permissions,
   }
 
 })

@@ -45,13 +45,19 @@ export const generatorDynamicRouter = (token) => {
     sysUserMenu().then(res => {
       const { data } = res
       const childrenNav = []
+      const codes =[]
+      for (const childrenNavKey in data) {
+        codes.push(data[childrenNavKey].code)
+        for (const permissionsKey in data[childrenNavKey].permissions) {
+          codes.push(data[childrenNavKey].permissions[permissionsKey].code)
+        }
+      }
       //      后端数据, 根级树数组,  根级 PID
       listToTree(data, childrenNav, 0)
       rootRouter.children=rootRouter.children.concat(childrenNav)
-      console.log(rootRouter)
       const routers = generator([rootRouter])
       routers.push(notFoundRouter)
-      resolve(routers)
+      resolve({'routers':routers,'codes':codes})
     }).catch(err => {
       reject(err)
     })
