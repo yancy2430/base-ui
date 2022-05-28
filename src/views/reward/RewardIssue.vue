@@ -13,7 +13,7 @@
         <a-switch @change="onAudit" v-model:checked="searchData.audit" checked-children="审" un-checked-children="审"/>
       </template>
       <template #Search="{formState}">
-        <a-form-item label="标题" name="title" v-auth="{name:'标题搜索条件',apis:[rewardIssuePage,rewardIssueGetById]}">
+        <a-form-item label="标题" name="title">
           <a-input v-model:value="formState.title"/>
         </a-form-item>
         <a-form-item label="状态" name="state">
