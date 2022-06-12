@@ -3,13 +3,13 @@ import {serviceUrl} from '@/utils/request'
 
 
 /**
- * 获取
+ * 获取店铺关联表
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
-export function sysLoginLogGetById (queryParams,options) {
+export function mallStoreUserGetById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/sys/LoginLog/getById',
+    url: serviceUrl+'/tongdao/mallStoreUser/getById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -19,12 +19,12 @@ export function sysLoginLogGetById (queryParams,options) {
 }
 
 /**
- * 保存或更新
+ * 保存或更新店铺关联表
  * @param data body对象
 */
-export function sysLoginLogSave (data,options) {
+export function mallStoreUserSave (data,options) {
     return request(Object.assign({
-    url: serviceUrl+'/sys/LoginLog/save',
+    url: serviceUrl+'/tongdao/mallStoreUser/save',
     method: 'POST',
     data: JSON.stringify(data),
     headers: {
@@ -34,13 +34,13 @@ export function sysLoginLogSave (data,options) {
 }
 
 /**
- * 删除
+ * 删除店铺关联表
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
-export function sysLoginLogRemoveById (queryParams,options) {
+export function mallStoreUserRemoveById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/sys/LoginLog/removeById',
+    url: serviceUrl+'/tongdao/mallStoreUser/removeById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -50,13 +50,13 @@ export function sysLoginLogRemoveById (queryParams,options) {
 }
 
 /**
- * 列表
+ * 店铺关联表列表
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
-export function sysLoginLogPage (queryParams,options) {
+export function mallStoreUserPage (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/sys/LoginLog/page',
+    url: serviceUrl+'/tongdao/mallStoreUser/page',
     method: 'POST',
     params:queryParams,
     headers: {

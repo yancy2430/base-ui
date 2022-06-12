@@ -7,9 +7,9 @@ import {serviceUrl} from '@/utils/request'
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
-export function sysLoginLogGetById (queryParams,options) {
+export function memberUserGetById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/sys/LoginLog/getById',
+    url: serviceUrl+'/member/memberUser/getById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -22,9 +22,9 @@ export function sysLoginLogGetById (queryParams,options) {
  * 保存或更新
  * @param data body对象
 */
-export function sysLoginLogSave (data,options) {
+export function memberUserSave (data,options) {
     return request(Object.assign({
-    url: serviceUrl+'/sys/LoginLog/save',
+    url: serviceUrl+'/member/memberUser/save',
     method: 'POST',
     data: JSON.stringify(data),
     headers: {
@@ -38,9 +38,9 @@ export function sysLoginLogSave (data,options) {
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
-export function sysLoginLogRemoveById (queryParams,options) {
+export function memberUserRemoveById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/sys/LoginLog/removeById',
+    url: serviceUrl+'/member/memberUser/removeById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -54,9 +54,9 @@ export function sysLoginLogRemoveById (queryParams,options) {
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
-export function sysLoginLogPage (queryParams,options) {
+export function memberUserPage (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/sys/LoginLog/page',
+    url: serviceUrl+'/member/memberUser/page',
     method: 'POST',
     params:queryParams,
     headers: {

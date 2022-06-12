@@ -13,7 +13,7 @@ export function sysResourcesGetById (queryParams,options) {
     method: 'POST',
     params:queryParams,
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }
@@ -28,7 +28,7 @@ export function sysResourcesSave (data,options) {
     method: 'POST',
     data: JSON.stringify(data),
     headers: {
-    'Content-Type': 'application/json; charset=utf-8'
+    'Content-Type': 'application/json'
     }
     },options))
 }
@@ -44,7 +44,7 @@ export function sysResourcesRemoveById (queryParams,options) {
     method: 'POST',
     params:queryParams,
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }
@@ -60,7 +60,7 @@ export function sysResourcesPage (queryParams,options) {
     method: 'POST',
     params:queryParams,
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }
@@ -73,7 +73,7 @@ export function sysResourcesList (options) {
     url: serviceUrl+'/sys/Resources/list',
     method: 'POST',
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }
@@ -86,7 +86,7 @@ export function sysResourcesMethods (options) {
     url: serviceUrl+'/sys/Resources/methodAll',
     method: 'POST',
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }

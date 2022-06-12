@@ -7,9 +7,9 @@ import {serviceUrl} from '@/utils/request'
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
-export function sysLoginLogGetById (queryParams,options) {
+export function mallMenuGetById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/sys/LoginLog/getById',
+    url: serviceUrl+'/tongdao/mallMenu/getById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -22,9 +22,9 @@ export function sysLoginLogGetById (queryParams,options) {
  * 保存或更新
  * @param data body对象
 */
-export function sysLoginLogSave (data,options) {
+export function mallMenuSave (data,options) {
     return request(Object.assign({
-    url: serviceUrl+'/sys/LoginLog/save',
+    url: serviceUrl+'/tongdao/mallMenu/save',
     method: 'POST',
     data: JSON.stringify(data),
     headers: {
@@ -38,9 +38,9 @@ export function sysLoginLogSave (data,options) {
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
-export function sysLoginLogRemoveById (queryParams,options) {
+export function mallMenuRemoveById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/sys/LoginLog/removeById',
+    url: serviceUrl+'/tongdao/mallMenu/removeById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -54,9 +54,9 @@ export function sysLoginLogRemoveById (queryParams,options) {
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
-export function sysLoginLogPage (queryParams,options) {
+export function mallMenuPage (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/sys/LoginLog/page',
+    url: serviceUrl+'/tongdao/mallMenu/page',
     method: 'POST',
     params:queryParams,
     headers: {

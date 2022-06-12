@@ -13,7 +13,7 @@ export function sysUserGetById (queryParams,options) {
     method: 'POST',
     params:queryParams,
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }
@@ -28,7 +28,7 @@ export function sysUserSave (data,options) {
     method: 'POST',
     data: JSON.stringify(data),
     headers: {
-    'Content-Type': 'application/json; charset=utf-8'
+    'Content-Type': 'application/json'
     }
     },options))
 }
@@ -44,7 +44,7 @@ export function sysUserRemoveById (queryParams,options) {
     method: 'POST',
     params:queryParams,
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }
@@ -60,7 +60,7 @@ export function sysUserPage (queryParams,options) {
     method: 'POST',
     params:queryParams,
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }
@@ -73,7 +73,7 @@ export function sysUserMenu (options) {
     url: serviceUrl+'/sys/User/menu',
     method: 'POST',
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }
@@ -86,7 +86,7 @@ export function sysUserInfo (options) {
     url: serviceUrl+'/sys/User/info',
     method: 'POST',
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }
@@ -102,7 +102,7 @@ export function sysUserLogin (queryParams,options) {
     method: 'POST',
     params:queryParams,
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }
@@ -115,7 +115,7 @@ export function sysUserValidationCode (options) {
     url: serviceUrl+'/sys/User/validationCode',
     method: 'POST',
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }
@@ -131,7 +131,7 @@ export function sysUserValidation (queryParams,options) {
     method: 'POST',
     params:queryParams,
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }
@@ -144,7 +144,20 @@ export function sysUserLogout (options) {
     url: serviceUrl+'/sys/User/logout',
     method: 'POST',
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    }
+    },options))
+}
+
+/**
+ * 同步用户
+*/
+export function sysUserUserSync (options) {
+    return request(Object.assign({
+    url: serviceUrl+'/sys/User/userSync',
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }

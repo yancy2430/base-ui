@@ -13,7 +13,7 @@ export function sysGroupResourcesGetById (queryParams,options) {
     method: 'POST',
     params:queryParams,
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }
@@ -28,7 +28,7 @@ export function sysGroupResourcesSave (data,options) {
     method: 'POST',
     data: JSON.stringify(data),
     headers: {
-    'Content-Type': 'application/json; charset=utf-8'
+    'Content-Type': 'application/json'
     }
     },options))
 }
@@ -44,7 +44,7 @@ export function sysGroupResourcesRemoveById (queryParams,options) {
     method: 'POST',
     params:queryParams,
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }
@@ -60,7 +60,7 @@ export function sysGroupResourcesPage (queryParams,options) {
     method: 'POST',
     params:queryParams,
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }

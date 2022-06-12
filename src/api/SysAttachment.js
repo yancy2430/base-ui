@@ -13,7 +13,7 @@ export function sysAttachmentGetById (queryParams,options) {
     method: 'POST',
     params:queryParams,
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }
@@ -28,7 +28,7 @@ export function sysAttachmentSave (data,options) {
     method: 'POST',
     data: JSON.stringify(data),
     headers: {
-    'Content-Type': 'application/json; charset=utf-8'
+    'Content-Type': 'application/json'
     }
     },options))
 }
@@ -44,7 +44,7 @@ export function sysAttachmentRemoveById (queryParams,options) {
     method: 'POST',
     params:queryParams,
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }
@@ -60,7 +60,7 @@ export function sysAttachmentPage (queryParams,options) {
     method: 'POST',
     params:queryParams,
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }

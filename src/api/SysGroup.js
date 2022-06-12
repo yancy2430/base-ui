@@ -13,7 +13,7 @@ export function sysGroupRemoveGroupById (queryParams,options) {
     method: 'POST',
     params:queryParams,
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }
@@ -28,7 +28,7 @@ export function sysGroupSubmitGroup (data,options) {
     method: 'POST',
     data: JSON.stringify(data),
     headers: {
-    'Content-Type': 'application/json; charset=utf-8'
+    'Content-Type': 'application/json'
     }
     },options))
 }
@@ -44,7 +44,7 @@ export function sysGroupGetById (queryParams,options) {
     method: 'POST',
     params:queryParams,
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }
@@ -57,7 +57,7 @@ export function sysGroupList (options) {
     url: serviceUrl+'/sys/Group/list',
     method: 'POST',
     headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
     },options))
 }

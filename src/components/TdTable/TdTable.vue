@@ -78,7 +78,7 @@
           </a-col>
         </a-row>
       </template>
-      <a-table-column title="序号" align="center" >
+      <a-table-column v-if="number" title="序号" align="center" >
         <template #default="{ index}">
           {{index+1}}
         </template>
@@ -143,6 +143,12 @@ import {Container, Draggable} from "vue3-smooth-dnd";
 export default {
   name: 'TdTable',
   props: {
+    number:{
+      type: Boolean,
+      default() {
+        return false
+      }
+    },
     title: {
       type: String,
       default() {
