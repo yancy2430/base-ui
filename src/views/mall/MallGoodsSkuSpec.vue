@@ -25,12 +25,12 @@
 </template>
 
 <script>
-    import TdTable from "@/components/TdTable/TdTable";
+
     import {mallGoodsSkuSpecPage} from "@/api/MallGoodsSkuSpec";
 
     export default {
         name: "MallGoodsSkuSpec",
-        components: {TdTable},
+        components: {},
         data() {
             return {
                 mallGoodsSkuSpecPage: mallGoodsSkuSpecPage

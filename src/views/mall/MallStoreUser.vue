@@ -21,12 +21,12 @@
 </template>
 
 <script>
-    import TdTable from "@/components/TdTable/TdTable";
+
     import {mallStoreUserPage} from "@/api/MallStoreUser";
 
     export default {
         name: "MallStoreUser",
-        components: {TdTable},
+        components: {},
         data() {
             return {
                 mallStoreUserPage: mallStoreUserPage

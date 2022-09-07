@@ -18,6 +18,10 @@ import {router} from './router'
 import md5 from "md5";
 vue.use(router);
 
+
+import Component from "@zycl/base-component/src/main";
+vue.use(Component)
+
 vue.directive('auth', {
     beforeMount: function (el, binding, vnode) {
         if (!store.getters.permissions.includes(md5(binding.value.name).slice(8,24))){//判断权限

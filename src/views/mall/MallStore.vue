@@ -77,12 +77,12 @@
 </template>
 
 <script>
-    import TdTable from "@/components/TdTable/TdTable";
+
     import {mallStorePage} from "@/api/MallStore";
 
     export default {
         name: "MallStore",
-        components: {TdTable},
+        components: {},
         data() {
             return {
                 mallStorePage: mallStorePage

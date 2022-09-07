@@ -29,12 +29,12 @@
 </template>
 
 <script>
-    import TdTable from "@/components/TdTable/TdTable";
+
     import {mallStoreCollectPage} from "@/api/MallStoreCollect";
 
     export default {
         name: "MallStoreCollect",
-        components: {TdTable},
+        components: {},
         data() {
             return {
                 mallStoreCollectPage: mallStoreCollectPage

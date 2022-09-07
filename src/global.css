@@ -154,3 +154,8 @@
   line-height: 1;
   content: '*';
 }
+.table-search-btn .ant-btn-primary{
+
+  border-color: #2db7f5;
+  background: #2db7f5;
+}

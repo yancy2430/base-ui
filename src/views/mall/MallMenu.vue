@@ -33,12 +33,12 @@
 </template>
 
 <script>
-    import TdTable from "@/components/TdTable/TdTable";
+
     import {mallMenuPage} from "@/api/MallMenu";
 
     export default {
         name: "MallMenu",
-        components: {TdTable},
+        components: {},
         data() {
             return {
                 mallMenuPage: mallMenuPage

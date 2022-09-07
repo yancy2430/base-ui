@@ -3,30 +3,22 @@
         <td-table
                 title=""
                 ref="table"
-                :data-source="parameter=>mallStoreGoodsCatePage(parameter)">
+                :data-source="parameter=>houseProductPhotoCatePage(parameter)">
             <template #Search="{formState}">
                     <a-form-item label="ID" name="id">
                             <a-input-number v-model:value="formState.id"/>
                     </a-form-item>
-                    <a-form-item label="名称" name="name">
+                    <a-form-item label="分类名称" name="name">
                             <a-input v-model:value="formState.name"/>
                     </a-form-item>
                     <a-form-item label="排序" name="sort">
                             <a-input-number v-model:value="formState.sort"/>
                     </a-form-item>
-                    <a-form-item label="产品数量" name="count">
-                            <a-input-number v-model:value="formState.count"/>
-                    </a-form-item>
-                    <a-form-item label="所属店铺" name="storeId">
-                            <a-input-number v-model:value="formState.storeId"/>
-                    </a-form-item>
             </template>
             <template #Columns>
                     <a-table-column title="ID" data-index="id" align="center" :sorter="true" />
-                    <a-table-column title="名称" data-index="name" align="center"  />
+                    <a-table-column title="分类名称" data-index="name" align="center"  />
                     <a-table-column title="排序" data-index="sort" align="center" :sorter="true" />
-                    <a-table-column title="产品数量" data-index="count" align="center" :sorter="true" />
-                    <a-table-column title="所属店铺" data-index="storeId" align="center" :sorter="true" />
             </template>
         </td-table>
     </section>
@@ -34,14 +26,14 @@
 
 <script>
 
-    import {mallStoreGoodsCatePage} from "@/api/MallStoreGoodsCate";
+    import {houseProductPhotoCatePage} from "@/api/HouseProductPhotoCate";
 
     export default {
-        name: "MallStoreGoodsCate",
+        name: "HouseProductPhotoCate",
         components: {},
         data() {
             return {
-                mallStoreGoodsCatePage: mallStoreGoodsCatePage
+                houseProductPhotoCatePage: houseProductPhotoCatePage
             }
         },
         created() {

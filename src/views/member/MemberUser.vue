@@ -65,12 +65,12 @@
 </template>
 
 <script>
-    import TdTable from "@/components/TdTable/TdTable";
+
     import {memberUserPage} from "@/api/MemberUser";
 
     export default {
         name: "MemberUser",
-        components: {TdTable},
+        components: {},
         data() {
             return {
                 memberUserPage: memberUserPage

@@ -49,12 +49,12 @@
 </template>
 
 <script>
-    import TdTable from "@/components/TdTable/TdTable";
+
     import {mallUserAddressPage} from "@/api/MallUserAddress";
 
     export default {
         name: "MallUserAddress",
-        components: {TdTable},
+        components: {},
         data() {
             return {
                 mallUserAddressPage: mallUserAddressPage

@@ -37,12 +37,12 @@
 </template>
 
 <script>
-    import TdTable from "@/components/TdTable/TdTable";
+
     import {mallPayLogPage} from "@/api/MallPayLog";
 
     export default {
         name: "MallPayLog",
-        components: {TdTable},
+        components: {},
         data() {
             return {
                 mallPayLogPage: mallPayLogPage

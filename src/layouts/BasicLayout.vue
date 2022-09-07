@@ -76,7 +76,6 @@ import {
   BellOutlined,
 } from '@ant-design/icons-vue';
 import SubMenu from "@/components/SubMenu/SubMenu";
-import MultiTab from "@/components/MultiTab/MultiTab";
 import {sysUserInfo} from "@/api/SysUser";
 import storage from "store";
 
@@ -120,7 +119,6 @@ export default defineComponent({
     }
   },
   components: {
-    MultiTab,
     'sub-menu': SubMenu,
     PieChartOutlined,
     ReloadOutlined,

@@ -3,32 +3,37 @@
         <td-table
                 title=""
                 ref="table"
-                :data-source="parameter=>memberGroupPage(parameter)">
+                :data-source="parameter=>houseProductBasisCatePage(parameter)">
             <template #Search="{formState}">
                     <a-form-item label="" name="id">
                             <a-input-number v-model:value="formState.id"/>
                     </a-form-item>
-                    <a-form-item label="用户组" name="groupName">
-                            <a-input v-model:value="formState.groupName"/>
+                    <a-form-item label="分类名称" name="name">
+                            <a-input v-model:value="formState.name"/>
+                    </a-form-item>
+                    <a-form-item label="排序" name="sort">
+                            <a-input-number v-model:value="formState.sort"/>
                     </a-form-item>
             </template>
             <template #Columns>
                     <a-table-column title="" data-index="id" align="center" :sorter="true" />
-                    <a-table-column title="用户组" data-index="groupName" align="center"  />
+                    <a-table-column title="分类名称" data-index="name" align="center"  />
+                    <a-table-column title="排序" data-index="sort" align="center" :sorter="true" />
             </template>
         </td-table>
     </section>
 </template>
 
 <script>
-    import {memberGroupPage} from "@/api/MemberGroup";
+
+    import {houseProductBasisCatePage} from "@/api/HouseProductBasisCate";
 
     export default {
-        name: "MemberGroup",
+        name: "HouseProductBasisCate",
         components: {},
         data() {
             return {
-                memberGroupPage: memberGroupPage
+                houseProductBasisCatePage: houseProductBasisCatePage
             }
         },
         created() {

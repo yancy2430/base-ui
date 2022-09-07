@@ -41,12 +41,12 @@
 </template>
 
 <script>
-    import TdTable from "@/components/TdTable/TdTable";
+
     import {mallOrderGoodsPage} from "@/api/MallOrderGoods";
 
     export default {
         name: "MallOrderGoods",
-        components: {TdTable},
+        components: {},
         data() {
             return {
                 mallOrderGoodsPage: mallOrderGoodsPage

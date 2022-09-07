@@ -3,6 +3,7 @@
     <td-table
         title="管理账号"
         ref="table"
+        :set-individuation="sysg"
         :row-selection="rowSelection"
         :get-item-by-id="parameter=>sysUserGetById({id:parameter.id})"
         :add-item-ok="parameter=>sysUserSave(parameter)"
@@ -219,20 +220,23 @@
 </template>
 
 <script>
-import TdTable from "@/components/TdTable/TdTable";
+
 import {sysUserGetById, sysUserPage, sysUserRemoveById, sysUserSave} from "@/api/SysUser";
 import {sysGroupList} from "@/api/SysGroup";
 import {toTree} from "@/utils/util";
+import {sysUserIndividuationGetById, sysUserIndividuationSaveTableCustom} from "@/api/SysUserIndividuation";
 
 export default {
   name: "SysUser",
-  components: {TdTable},
+  components: {},
   data() {
     return {
       sysUserPage: sysUserPage,
       sysUserRemoveById: sysUserRemoveById,
       sysUserSave: sysUserSave,
       sysUserGetById: sysUserGetById,
+      sysUserIndividuationSaveTableCustom,
+      sysUserIndividuationGetById,
       groupData: [],
       rowSelection:{
         onChange: (selectedRowKeys, selectedRows) => {
