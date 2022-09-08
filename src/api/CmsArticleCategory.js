@@ -64,3 +64,19 @@ export function cmsArticleCategoryPage (queryParams,options) {
     }
     },options))
 }
+
+/**
+ * 数据列表
+ * @param queryParams 参数对象
+ * @param options ajax其他参数
+*/
+export function cmsArticleCategoryList (queryParams,options) {
+    return request(Object.assign({
+    url: serviceUrl+'/cms/ArticleCategory/list',
+    method: 'POST',
+    params:queryParams,
+    headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    }
+    },options))
+}

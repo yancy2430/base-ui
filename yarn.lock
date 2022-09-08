@@ -1662,10 +1662,10 @@
   resolved "https://registry.yarnpkg.com/@vue/web-component-wrapper/-/web-component-wrapper-1.3.0.tgz#b6b40a7625429d2bd7c2281ddba601ed05dc7f1a"
   integrity sha512-Iu8Tbg3f+emIIMmI2ycSI8QcEuAUgPTgHwesDU1eKMLE4YC/c/sFbGc70QgMq31ijRftV0R7vCm9co6rldCeOA==
 
-"@vueup/vue-quill@^1.0.0-beta.7":
-  version "1.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@vueup/vue-quill/-/vue-quill-1.0.0-beta.8.tgz#6ba101a3963c4f3cc03059ce13c303c729166fa1"
-  integrity sha512-3fnIdmnz2ba4dI4WIpudlYoev9r5hrL8NrvhzMXrBj5c5+uEBqM2P48Q+skwToFZjPJT+QDIKiQqY3CXJvpX/Q==
+"@vueup/vue-quill@^1.0.0-beta.8":
+  version "1.0.0-beta.10"
+  resolved "https://registry.yarnpkg.com/@vueup/vue-quill/-/vue-quill-1.0.0-beta.10.tgz#c523ca72726a6e510c342164c755e99f64a49122"
+  integrity sha512-A3jAiO216/JfGaU04Xixheu/+lLEXOfn9IPXiV9RrLr/jjf/m90gnXRv5lTF/qOUVRexO69I/AiaVoIiemJevQ==
   dependencies:
     quill "^1.3.7"
     quill-delta "^4.2.2"
@@ -1963,10 +1963,10 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-"@zycl/base-component@^1.2.3":
-  version "1.2.3"
-  resolved "https://nexus.yangzhe.wiki/repository/zycl-npm/@zycl/base-component/-/base-component-1.2.3.tgz#8050510040e577e07e7ac5568ae5394670aeebf1"
-  integrity sha512-cYh7G5sHZtGc+RKxm0iZ5ohgw5R02JUf66W/L7F4uDRQ1NEuGp18CT7B6Jo6e0/2o2o/YkMCzobWl+Gopowjjw==
+"@zycl/base-component@^1.2.4":
+  version "1.2.4"
+  resolved "https://nexus.yangzhe.wiki/repository/zycl-npm/@zycl/base-component/-/base-component-1.2.4.tgz#4fc3c6932c1ae9e4497698f58178eca22575fda7"
+  integrity sha512-xcH630ho+roUD10QB9l9pq6s5Em8m9D93QbhwUbxQMHeseJDbHNLSHDw7Aos7ZFR4h48leO7S37dfZc++RaK+A==
 
 accepts@~1.3.4, accepts@~1.3.5, accepts@~1.3.8:
   version "1.3.8"
