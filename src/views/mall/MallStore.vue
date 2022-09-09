@@ -3,6 +3,10 @@
         <td-table
                 title=""
                 ref="table"
+                :get-item-by-id="parameter=>mallStoreGetById(parameter)"
+                :add-item-ok="parameter=>mallStoreSave(parameter)"
+                :edit-item-ok="parameter=>mallStoreSave(parameter)"
+                :delete-item-ok="parameter=>mallStoreRemoveById(parameter)"
                 :data-source="parameter=>mallStorePage(parameter)">
             <template #Search="{formState}">
                     <a-form-item label="店铺ID" name="id">
@@ -72,20 +76,122 @@
                     <a-table-column title="执照照片" data-index="license" align="center"  />
                     <a-table-column title="店铺状态 " data-index="business" align="center"  />
             </template>
+            <template #AddItem="{formState}">
+                    <a-form-item label="店铺ID" name="id">
+                            <a-input-number v-model:value="formState.id"/>
+                    </a-form-item>
+                    <a-form-item label="用户ID" name="userId">
+                            <a-input-number v-model:value="formState.userId"/>
+                    </a-form-item>
+                    <a-form-item label="店铺分类" name="cateId">
+                            <a-input-number v-model:value="formState.cateId"/>
+                    </a-form-item>
+                    <a-form-item label="店铺名称" name="storeName">
+                            <a-input v-model:value="formState.storeName"/>
+                    </a-form-item>
+                    <a-form-item label="负责人" name="principalName">
+                            <a-input v-model:value="formState.principalName"/>
+                    </a-form-item>
+                    <a-form-item label="负责人联系电话" name="principalTel">
+                            <a-input v-model:value="formState.principalTel"/>
+                    </a-form-item>
+                    <a-form-item label="店铺logo" name="logo">
+                            <a-input v-model:value="formState.logo"/>
+                    </a-form-item>
+                    <a-form-item label="标签列表" name="storeTag">
+                            <a-input v-model:value="formState.storeTag"/>
+                    </a-form-item>
+                    <a-form-item label="店铺状态 " name="state">
+                            <a-input v-model:value="formState.state"/>
+                    </a-form-item>
+                    <a-form-item label="操作人" name="operator">
+                            <a-input v-model:value="formState.operator"/>
+                    </a-form-item>
+                    <a-form-item label="店铺地址" name="address">
+                            <a-input v-model:value="formState.address"/>
+                    </a-form-item>
+                    <a-form-item label="创建时间" name="createTime">
+                            <a-input v-model:value="formState.createTime"/>
+                    </a-form-item>
+                    <a-form-item label="负责人身份证" name="principalIdentity">
+                            <a-input v-model:value="formState.principalIdentity"/>
+                    </a-form-item>
+                    <a-form-item label="店铺简介" name="about">
+                            <a-input v-model:value="formState.about"/>
+                    </a-form-item>
+                    <a-form-item label="执照照片" name="license">
+                            <a-input v-model:value="formState.license"/>
+                    </a-form-item>
+                    <a-form-item label="店铺状态 " name="business">
+                            <a-input v-model:value="formState.business"/>
+                    </a-form-item>
+            </template>
+            <template #EditItem="{formState}">
+                    <a-form-item label="店铺ID" name="id">
+                            <a-input-number v-model:value="formState.id"/>
+                    </a-form-item>
+                    <a-form-item label="用户ID" name="userId">
+                            <a-input-number v-model:value="formState.userId"/>
+                    </a-form-item>
+                    <a-form-item label="店铺分类" name="cateId">
+                            <a-input-number v-model:value="formState.cateId"/>
+                    </a-form-item>
+                    <a-form-item label="店铺名称" name="storeName">
+                            <a-input v-model:value="formState.storeName"/>
+                    </a-form-item>
+                    <a-form-item label="负责人" name="principalName">
+                            <a-input v-model:value="formState.principalName"/>
+                    </a-form-item>
+                    <a-form-item label="负责人联系电话" name="principalTel">
+                            <a-input v-model:value="formState.principalTel"/>
+                    </a-form-item>
+                    <a-form-item label="店铺logo" name="logo">
+                            <a-input v-model:value="formState.logo"/>
+                    </a-form-item>
+                    <a-form-item label="标签列表" name="storeTag">
+                            <a-input v-model:value="formState.storeTag"/>
+                    </a-form-item>
+                    <a-form-item label="店铺状态 " name="state">
+                            <a-input v-model:value="formState.state"/>
+                    </a-form-item>
+                    <a-form-item label="操作人" name="operator">
+                            <a-input v-model:value="formState.operator"/>
+                    </a-form-item>
+                    <a-form-item label="店铺地址" name="address">
+                            <a-input v-model:value="formState.address"/>
+                    </a-form-item>
+                    <a-form-item label="创建时间" name="createTime">
+                            <a-input v-model:value="formState.createTime"/>
+                    </a-form-item>
+                    <a-form-item label="负责人身份证" name="principalIdentity">
+                            <a-input v-model:value="formState.principalIdentity"/>
+                    </a-form-item>
+                    <a-form-item label="店铺简介" name="about">
+                            <a-input v-model:value="formState.about"/>
+                    </a-form-item>
+                    <a-form-item label="执照照片" name="license">
+                            <a-input v-model:value="formState.license"/>
+                    </a-form-item>
+                    <a-form-item label="店铺状态 " name="business">
+                            <a-input v-model:value="formState.business"/>
+                    </a-form-item>
+            </template>
         </td-table>
     </section>
 </template>
 
 <script>
-
-    import {mallStorePage} from "@/api/MallStore";
+    import {mallStorePage,mallStoreRemoveById,mallStoreSave,mallStoreGetById} from "@/api/MallStore";
 
     export default {
         name: "MallStore",
         components: {},
         data() {
             return {
-                mallStorePage: mallStorePage
+                mallStorePage,
+                mallStoreRemoveById,
+                mallStoreSave,
+                mallStoreGetById
             }
         },
         created() {

@@ -10,9 +10,6 @@
         :delete-item-ok="parameter=>houseCompanyRemoveById(parameter)"
     >
       <template #Search="{formState}">
-        <a-form-item label="开发商ID" name="id">
-          <a-input-number v-model:value="formState.id"/>
-        </a-form-item>
         <a-form-item label="开发商名称" name="name">
           <a-input v-model:value="formState.name"/>
         </a-form-item>

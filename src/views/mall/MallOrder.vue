@@ -3,6 +3,10 @@
         <td-table
                 title=""
                 ref="table"
+                :get-item-by-id="parameter=>mallOrderGetById(parameter)"
+                :add-item-ok="parameter=>mallOrderSave(parameter)"
+                :edit-item-ok="parameter=>mallOrderSave(parameter)"
+                :delete-item-ok="parameter=>mallOrderRemoveById(parameter)"
                 :data-source="parameter=>mallOrderPage(parameter)">
             <template #Search="{formState}">
                     <a-form-item label="订单号" name="id">
@@ -88,20 +92,146 @@
                     <a-table-column title="备注" data-index="remark" align="center"  />
                     <a-table-column title="店铺ID" data-index="storeId" align="center" :sorter="true" />
             </template>
+            <template #AddItem="{formState}">
+                    <a-form-item label="订单号" name="id">
+                            <a-input-number v-model:value="formState.id"/>
+                    </a-form-item>
+                    <a-form-item label="用户ID" name="userId">
+                            <a-input-number v-model:value="formState.userId"/>
+                    </a-form-item>
+                    <a-form-item label="订单状态" name="state">
+                            <a-input v-model:value="formState.state"/>
+                    </a-form-item>
+                    <a-form-item label="商品总价" name="goodsTotalPrice">
+                            <a-input-number v-model:value="formState.goodsTotalPrice"/>
+                    </a-form-item>
+                    <a-form-item label="订单总价" name="orderTotalPrice">
+                            <a-input-number v-model:value="formState.orderTotalPrice"/>
+                    </a-form-item>
+                    <a-form-item label="订单减免" name="orderBreaks">
+                            <a-input-number v-model:value="formState.orderBreaks"/>
+                    </a-form-item>
+                    <a-form-item label="支付价格" name="payTotalPrice">
+                            <a-input-number v-model:value="formState.payTotalPrice"/>
+                    </a-form-item>
+                    <a-form-item label="是否邮寄" name="mail">
+                            <a-input v-model:value="formState.mail"/>
+                    </a-form-item>
+                    <a-form-item label="运费" name="freight">
+                            <a-input-number v-model:value="formState.freight"/>
+                    </a-form-item>
+                    <a-form-item label="支付时间" name="payTime">
+                            <a-input v-model:value="formState.payTime"/>
+                    </a-form-item>
+                    <a-form-item label="支付订单号" name="payOrderId">
+                            <a-input v-model:value="formState.payOrderId"/>
+                    </a-form-item>
+                    <a-form-item label="支付方式" name="payType">
+                            <a-input-number v-model:value="formState.payType"/>
+                    </a-form-item>
+                    <a-form-item label="发货时间" name="deliveryTime">
+                            <a-input v-model:value="formState.deliveryTime"/>
+                    </a-form-item>
+                    <a-form-item label="收货人" name="receiver">
+                            <a-input v-model:value="formState.receiver"/>
+                    </a-form-item>
+                    <a-form-item label="收货人电话" name="tel">
+                            <a-input v-model:value="formState.tel"/>
+                    </a-form-item>
+                    <a-form-item label="收货地址" name="address">
+                            <a-input v-model:value="formState.address"/>
+                    </a-form-item>
+                    <a-form-item label="创建时间" name="createTime">
+                            <a-input v-model:value="formState.createTime"/>
+                    </a-form-item>
+                    <a-form-item label="操作人" name="operator">
+                            <a-input-number v-model:value="formState.operator"/>
+                    </a-form-item>
+                    <a-form-item label="备注" name="remark">
+                            <a-input v-model:value="formState.remark"/>
+                    </a-form-item>
+                    <a-form-item label="店铺ID" name="storeId">
+                            <a-input-number v-model:value="formState.storeId"/>
+                    </a-form-item>
+            </template>
+            <template #EditItem="{formState}">
+                    <a-form-item label="订单号" name="id">
+                            <a-input-number v-model:value="formState.id"/>
+                    </a-form-item>
+                    <a-form-item label="用户ID" name="userId">
+                            <a-input-number v-model:value="formState.userId"/>
+                    </a-form-item>
+                    <a-form-item label="订单状态" name="state">
+                            <a-input v-model:value="formState.state"/>
+                    </a-form-item>
+                    <a-form-item label="商品总价" name="goodsTotalPrice">
+                            <a-input-number v-model:value="formState.goodsTotalPrice"/>
+                    </a-form-item>
+                    <a-form-item label="订单总价" name="orderTotalPrice">
+                            <a-input-number v-model:value="formState.orderTotalPrice"/>
+                    </a-form-item>
+                    <a-form-item label="订单减免" name="orderBreaks">
+                            <a-input-number v-model:value="formState.orderBreaks"/>
+                    </a-form-item>
+                    <a-form-item label="支付价格" name="payTotalPrice">
+                            <a-input-number v-model:value="formState.payTotalPrice"/>
+                    </a-form-item>
+                    <a-form-item label="是否邮寄" name="mail">
+                            <a-input v-model:value="formState.mail"/>
+                    </a-form-item>
+                    <a-form-item label="运费" name="freight">
+                            <a-input-number v-model:value="formState.freight"/>
+                    </a-form-item>
+                    <a-form-item label="支付时间" name="payTime">
+                            <a-input v-model:value="formState.payTime"/>
+                    </a-form-item>
+                    <a-form-item label="支付订单号" name="payOrderId">
+                            <a-input v-model:value="formState.payOrderId"/>
+                    </a-form-item>
+                    <a-form-item label="支付方式" name="payType">
+                            <a-input-number v-model:value="formState.payType"/>
+                    </a-form-item>
+                    <a-form-item label="发货时间" name="deliveryTime">
+                            <a-input v-model:value="formState.deliveryTime"/>
+                    </a-form-item>
+                    <a-form-item label="收货人" name="receiver">
+                            <a-input v-model:value="formState.receiver"/>
+                    </a-form-item>
+                    <a-form-item label="收货人电话" name="tel">
+                            <a-input v-model:value="formState.tel"/>
+                    </a-form-item>
+                    <a-form-item label="收货地址" name="address">
+                            <a-input v-model:value="formState.address"/>
+                    </a-form-item>
+                    <a-form-item label="创建时间" name="createTime">
+                            <a-input v-model:value="formState.createTime"/>
+                    </a-form-item>
+                    <a-form-item label="操作人" name="operator">
+                            <a-input-number v-model:value="formState.operator"/>
+                    </a-form-item>
+                    <a-form-item label="备注" name="remark">
+                            <a-input v-model:value="formState.remark"/>
+                    </a-form-item>
+                    <a-form-item label="店铺ID" name="storeId">
+                            <a-input-number v-model:value="formState.storeId"/>
+                    </a-form-item>
+            </template>
         </td-table>
     </section>
 </template>
 
 <script>
-
-    import {mallOrderPage} from "@/api/MallOrder";
+    import {mallOrderPage,mallOrderRemoveById,mallOrderSave,mallOrderGetById} from "@/api/MallOrder";
 
     export default {
         name: "MallOrder",
         components: {},
         data() {
             return {
-                mallOrderPage: mallOrderPage
+                mallOrderPage,
+                mallOrderRemoveById,
+                mallOrderSave,
+                mallOrderGetById
             }
         },
         created() {

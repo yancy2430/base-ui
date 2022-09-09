@@ -3,6 +3,10 @@
         <td-table
                 title=""
                 ref="table"
+                :get-item-by-id="parameter=>mallOrderSnapshotGetById(parameter)"
+                :add-item-ok="parameter=>mallOrderSnapshotSave(parameter)"
+                :edit-item-ok="parameter=>mallOrderSnapshotSave(parameter)"
+                :delete-item-ok="parameter=>mallOrderSnapshotRemoveById(parameter)"
                 :data-source="parameter=>mallOrderSnapshotPage(parameter)">
             <template #Search="{formState}">
                     <a-form-item label="" name="id">
@@ -28,20 +32,56 @@
                     <a-table-column title="店铺快照" data-index="storeInfo" align="center"  />
                     <a-table-column title="收货人快照" data-index="receiverInfo" align="center"  />
             </template>
+            <template #AddItem="{formState}">
+                    <a-form-item label="" name="id">
+                            <a-input-number v-model:value="formState.id"/>
+                    </a-form-item>
+                    <a-form-item label="订单ID" name="orderId">
+                            <a-input-number v-model:value="formState.orderId"/>
+                    </a-form-item>
+                    <a-form-item label="商品快照" name="goodsInfo">
+                            <a-input v-model:value="formState.goodsInfo"/>
+                    </a-form-item>
+                    <a-form-item label="店铺快照" name="storeInfo">
+                            <a-input v-model:value="formState.storeInfo"/>
+                    </a-form-item>
+                    <a-form-item label="收货人快照" name="receiverInfo">
+                            <a-input v-model:value="formState.receiverInfo"/>
+                    </a-form-item>
+            </template>
+            <template #EditItem="{formState}">
+                    <a-form-item label="" name="id">
+                            <a-input-number v-model:value="formState.id"/>
+                    </a-form-item>
+                    <a-form-item label="订单ID" name="orderId">
+                            <a-input-number v-model:value="formState.orderId"/>
+                    </a-form-item>
+                    <a-form-item label="商品快照" name="goodsInfo">
+                            <a-input v-model:value="formState.goodsInfo"/>
+                    </a-form-item>
+                    <a-form-item label="店铺快照" name="storeInfo">
+                            <a-input v-model:value="formState.storeInfo"/>
+                    </a-form-item>
+                    <a-form-item label="收货人快照" name="receiverInfo">
+                            <a-input v-model:value="formState.receiverInfo"/>
+                    </a-form-item>
+            </template>
         </td-table>
     </section>
 </template>
 
 <script>
-
-    import {mallOrderSnapshotPage} from "@/api/MallOrderSnapshot";
+    import {mallOrderSnapshotPage,mallOrderSnapshotRemoveById,mallOrderSnapshotSave,mallOrderSnapshotGetById} from "@/api/MallOrderSnapshot";
 
     export default {
         name: "MallOrderSnapshot",
         components: {},
         data() {
             return {
-                mallOrderSnapshotPage: mallOrderSnapshotPage
+                mallOrderSnapshotPage,
+                mallOrderSnapshotRemoveById,
+                mallOrderSnapshotSave,
+                mallOrderSnapshotGetById
             }
         },
         created() {

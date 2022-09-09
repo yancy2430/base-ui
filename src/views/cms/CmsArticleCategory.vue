@@ -1,49 +1,72 @@
 <template>
     <section>
         <td-table
-                title="文章分类"
+                title=""
                 ref="table"
+                defaultExpandAllRows
+                childrenColumnName
+                :data-process="process"
+                :indentSize="30"
+                :get-item-by-id="parameter=>cmsArticleCategoryGetById({id:parameter.id})"
                 :add-item-ok="parameter=>cmsArticleCategorySave(parameter)"
+                :edit-item-ok="parameter=>cmsArticleCategorySave(parameter)"
+                :delete-item-ok="parameter=>cmsArticleCategoryRemoveById(parameter)"
                 :data-source="parameter=>cmsArticleCategoryPage(parameter)">
             <template #Search="{formState}">
+                    <a-form-item label="类别ID" name="id">
+                            <a-input-number v-model:value="formState.id"/>
+                    </a-form-item>
                     <a-form-item label="类别名称" name="name">
-                            <a-input-number v-model:value="formState.name"/>
+                            <a-input v-model:value="formState.name"/>
                     </a-form-item>
             </template>
             <template #Columns>
                     <a-table-column title="类别ID" data-index="id" align="center" :sorter="true" />
-                    <a-table-column title="所属上级" data-index="pid" align="center" :sorter="true" />
-                    <a-table-column title="类别名称" data-index="name" align="center" :sorter="true" />
+                    <a-table-column title="类别名称" data-index="name" align="center"  />
             </template>
-          <template #AddItem="{formState}">
-            <div style="width: 500px;padding-right: 80px">
-              <a-form-item label="所属上级" name="pid">
-                <a-input v-model:value="formState.pid"/>
-              </a-form-item>
-              <a-form-item label="类别名称" name="name">
-                <a-input v-model:value="formState.name"/>
-              </a-form-item>
-            </div>
-          </template>
+            <template #AddItem="{formState}">
+                    <a-form-item label="所属上级" name="pid">
+                      <td-select-tree :field-names="{children:'children',parentKey:'pid', label:'name', key:'id', value: 'id' }" :data-source="cmsArticleCategoryList" v-model:value="formState.pid"/>
+                    </a-form-item>
+                    <a-form-item label="类别名称" name="name">
+                            <a-input v-model:value="formState.name"/>
+                    </a-form-item>
+            </template>
+            <template #EditItem="{formState}">
+                    <a-form-item label="所属上级" name="pid">
+                      <td-select-tree :field-names="{children:'children',parentKey:'pid', label:'name', key:'id', value: 'id' }" :data-source="cmsArticleCategoryList" v-model:value="formState.pid"/>
+                    </a-form-item>
+                    <a-form-item label="类别名称" name="name">
+                            <a-input v-model:value="formState.name"/>
+                    </a-form-item>
+            </template>
         </td-table>
     </section>
 </template>
 
 <script>
-    import {cmsArticleCategoryPage,cmsArticleCategorySave} from "@/api/CmsArticleCategory";
-
+    import {cmsArticleCategoryPage,cmsArticleCategoryRemoveById,cmsArticleCategorySave,cmsArticleCategoryGetById,cmsArticleCategoryList} from "@/api/CmsArticleCategory";
+    import {toTree} from "@/utils/util";
     export default {
         name: "CmsArticleCategory",
         components: {},
         data() {
             return {
-              cmsArticleCategorySave,
-                cmsArticleCategoryPage
+                cmsArticleCategoryList,
+                cmsArticleCategoryPage,
+                cmsArticleCategoryRemoveById,
+                cmsArticleCategorySave,
+                cmsArticleCategoryGetById
             }
         },
         created() {
         },
-        methods: {}
+        methods: {
+          process(data){
+            data.records=toTree(data.records,"id","pid","name","children")
+            return data;
+          }
+        }
     }
 </script>
 

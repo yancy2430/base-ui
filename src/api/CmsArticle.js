@@ -64,3 +64,39 @@ export function cmsArticlePage (queryParams,options) {
     }
     },options))
 }
+
+/**
+ * 文件上传
+ * @param queryParams 参数对象
+ * @param options ajax其他参数
+*/
+export function cmsArticleUpload (queryParams,options) {
+        const formData = new FormData()
+            formData.append('file',queryParams.file);
+    return request(Object.assign({
+    url: serviceUrl+'/cms/Article/upload',
+    method: 'POST',
+    data: formData,
+    headers: {
+    'Content-Type': 'multipart/form-data'
+    }
+    },options))
+}
+
+/**
+ * 文件上传
+ * @param queryParams 参数对象
+ * @param options ajax其他参数
+*/
+export function cmsArticleUploads (queryParams,options) {
+        const formData = new FormData()
+            formData.append('files',queryParams.files);
+    return request(Object.assign({
+    url: serviceUrl+'/cms/Article/uploads',
+    method: 'POST',
+    data: formData,
+    headers: {
+    'Content-Type': 'multipart/form-data'
+    }
+    },options))
+}
