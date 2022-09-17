@@ -51,7 +51,14 @@
             </template>
             <template #Columns>
                     <a-table-column title="UID" data-index="id" align="center" :sorter="true" />
-                    <a-table-column title="头像" data-index="avatar" align="center"  />
+                    <a-table-column title="头像" data-index="avatar" align="center">
+                      <template #default="{record}">
+                        <a-image
+                            :width="40"
+                            :src="record.avatar"
+                        />
+                      </template>
+                    </a-table-column>
                     <a-table-column title="昵称" data-index="nickName" align="center"  />
                     <a-table-column title="会员名" data-index="memberName" align="center"  />
                     <a-table-column title="真实姓名" data-index="realName" align="center"  />

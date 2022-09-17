@@ -159,3 +159,9 @@
   border-color: #2db7f5;
   background: #2db7f5;
 }
+.ant-btn-sm{
+  font-size: 13px;
+}
+.ant-menu-inline, .ant-menu-vertical, .ant-menu-vertical-left {
+  border-right: 0px solid #f0f0f0;
+}

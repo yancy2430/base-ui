@@ -1,15 +1,16 @@
 <template>
-  <a-layout style="min-height: 100vh">
-    <a-layout-sider :style="{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }"
-                    v-model:collapsed="collapsed" collapsible :width="180">
-      <div class="logo"><h1>后台管理系统</h1></div>
+  <a-layout style="height: 100vh;">
+    <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible
+                    :collapsedWidth="70">
+      <div class="main-logo">
+        <img style="width: 100%;height: 100%;" src="~@/assets/logo.svg" class="logo" alt="logo">
+      </div>
       <a-menu
           mode="inline"
           theme="dark"
-          :inline-collapsed="collapsed"
           @select="onSelect"
       >
-        <template v-for="item in menus" :key="item.key">
+        <template v-for="item in rootSubmenuKeys" :key="item.key">
           <template v-if="!item.children && !item.hidden">
             <a-menu-item :key="item.key">
               <template #icon>
@@ -24,131 +25,192 @@
         </template>
       </a-menu>
     </a-layout-sider>
-    <a-layout :style="{ marginLeft: '180px' }">
-      <a-layout-header class="layout-header">
-        <a-row type='flex' style="height: 42px;">
-          <a-col flex="60px" class="header-left">
-            <MenuFoldOutlined style="padding: 13px 22px;" class="head-icon"/>
-          </a-col>
-          <a-col flex="auto" class="header-center">
-            <multi-tab v-if="false"></multi-tab>
-          </a-col>
-          <a-col flex="220px" class="header-right">
-            <BellOutlined class="head-icon"/>
-            <a-dropdown>
-              <a class="ant-dropdown-link" @click.prevent>
-                <a-avatar class="avatar" :size="24">
-                  <template #icon><img src="https://xiangshangsl.com/avatar2.jpg"></template>
-                </a-avatar>
-                {{ userInfo.name }}
-              </a>
-              <template #overlay>
-                <a-menu>
-                  <a-menu-item @click="onSelect({key:'/account/settings'})">
-                    个人设置
-                  </a-menu-item>
-                  <a-menu-item @click="logOut">
-                    退出登录
-                  </a-menu-item>
-                </a-menu>
+    <a-layout>
+      <a-layout-header class="lay-header">
+        <div class="header-left">
+          <menu-unfold-outlined
+              v-if="collapsed"
+              class="trigger header-icon"
+              @click="() => (collapsed = !collapsed)"
+          />
+          <menu-fold-outlined v-else class="trigger header-icon" @click="() => (collapsed = !collapsed)"/>
+        </div>
+        <div class="header-tabs">
+          <!--          <multi-tab />-->
+        </div>
+        <div class="header-right">
+          <bell-outlined class="header-icon"/>
+          <div class="header-icon">
+            <a-avatar :size="24">
+              <template #icon>
+                <UserOutlined/>
               </template>
-            </a-dropdown>
-            <ReloadOutlined class="head-icon"/>
-          </a-col>
-        </a-row>
+            </a-avatar>
+            <span style="margin-left: 8px">{{ userInfo.name }}</span>
+          </div>
+          <reload-outlined class="header-icon reload" @click="onReload"/>
+          <global-outlined class="header-icon"/>
+          <search-outlined class="header-icon" @click="() => (visibleSearch = !visibleSearch)"/>
+          <!--          <setting-outlined class="header-icon" />-->
+        </div>
       </a-layout-header>
-      <a-layout-content :style="{ margin: '60px 16px 0', overflow: 'initial' }">
-        <router-view/>
+      <a-layout-content style="overflow:auto;height: calc(100vh - 100px);background: #f0f2f5;padding: 15px">
+        <router-view v-if="reload"/>
       </a-layout-content>
-      <a-layout-footer style="text-align: center">
-        Ant Design ©2018 Created by Ant UED
-      </a-layout-footer>
+      <search-window v-model:value="visibleSearch" @change="(val)=>{visibleSearch = val;console.log(val)} "/>
     </a-layout>
   </a-layout>
 </template>
-
 <script>
-import {defineComponent, ref, reactive} from 'vue';
 import {
   PieChartOutlined,
+  UserOutlined,
+  LaptopOutlined,
+  NotificationOutlined,
   ReloadOutlined,
-  MenuFoldOutlined,
+  SettingOutlined,
+  LineChartOutlined,
+  ProfileOutlined,
+  SearchOutlined,
+  MenuUnfoldOutlined,
   BellOutlined,
+  GlobalOutlined,
+  MenuFoldOutlined
 } from '@ant-design/icons-vue';
+import {defineComponent, getCurrentInstance, nextTick, reactive, ref, toRefs} from 'vue';
+import {useRouter} from 'vue-router'
+import {useStore} from "vuex";
+
 import SubMenu from "@/components/SubMenu/SubMenu";
 import {sysUserInfo} from "@/api/SysUser";
 import storage from "store";
-
 export default defineComponent({
-  name: "BasicLayout",
-  data() {
-    const collapsed = ref(false);
-
-    const toggleCollapsed = () => {
-      collapsed.value = !collapsed.value;
-    };
-
-    return {
-      menus: [],
-      userInfo: {},
-      collapsed,
-      toggleCollapsed,
-    };
+  name: "BaseLayout",
+  components: {
+    // SearchWindow,
+    // MultiTab,
+    PieChartOutlined,
+    UserOutlined,
+    LaptopOutlined,
+    NotificationOutlined,
+    ReloadOutlined,
+    SettingOutlined,
+    LineChartOutlined,
+    ProfileOutlined,
+    SearchOutlined,
+    MenuUnfoldOutlined,
+    BellOutlined,
+    GlobalOutlined,
+    MenuFoldOutlined,
+    SubMenu
   },
-  created() {
-    const routes = this.$store.getters.addRouters.find(item => item.path === '/')
-    this.menus = (routes && routes.children) || []
+  setup() {
+    const router = useRouter()
+    const store = useStore()
+    const userInfo = ref({})
+
+    const routes = store.getters.addRouters.find(item => item.path === '/')
+    const menus = (routes && routes.children) || []
     sysUserInfo().then(res => {
       storage.set("userInfo", res.data)
-      this.userInfo = res.data
+      userInfo.value = res.data
     })
-  },
-  methods: {
-    onSelect(e) {
-      console.log(e.key)
-      if (e.key) {
-        this.$router.push(e.key)
+    const state = reactive({
+      rootSubmenuKeys: menus,
+      openKeys: [],
+      selectedKeys: [],
+      reload:true,
+    });
+    const onOpenChange = openKeys => {
+      const latestOpenKey = openKeys.find(key => state.openKeys.indexOf(key) === -1);
+      if (state.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+        state.openKeys = openKeys;
+      } else {
+        state.openKeys = latestOpenKey ? [latestOpenKey] : [];
       }
-    },
-    logOut() {
+    }
+    const onSelect = (item) => {
+      router.push(item.key)
+    }
+    //刷新页面
+    const onReload = () => {
+      state.reload=false;
+      nextTick(()=>{
+        state.reload=true;
+      })
+    }
+    const logOut = () =>{
       storage.set("userInfo", null)
       storage.remove("userInfo")
       storage.set("ACCESS_TOKEN", null)
       storage.remove("ACCESS_TOKEN")
       this.$router.replace("/user/login")
     }
+
+    return {
+      ...toRefs(state),
+      userInfo,
+      collapsed: ref(false),
+      visibleSearch: ref(false),
+      onOpenChange,
+      logOut,
+      onSelect,
+      onReload
+    };
   },
-  components: {
-    'sub-menu': SubMenu,
-    PieChartOutlined,
-    ReloadOutlined,
-    BellOutlined,
-    MenuFoldOutlined,
-  }
+
 });
 </script>
-
-<style scoped>
-.logo {
-  height: 32px;
-  margin: 16px;
-  background: rgba(255, 255, 255, 0.3);
+<style>
+.main-logo {
+  height: 42px;
+  margin: 14px;
 }
 
-.logo h1 {
-  color: #fff;
-  font-size: 20px;
-  margin: 0 0 0 12px;
-  font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
-  font-weight: 600;
-  vertical-align: middle;
-}
-
-.site-layout .site-layout-background {
+.lay-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background: #fff;
+  padding: 0 16px 0 0;
+  height: 42px;
 }
 
-[data-theme='dark'] .site-layout .site-layout-background {
-  background: #141414;
+.lay-header > div {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
+
+.header-icon {
+  width: max-content;
+  font-size: 14px;
+  padding: 0 12px;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.header-icon:hover {
+  background: #f8f8f8;
+}
+
+.trigger {
+  font-size: 16px;
+  padding: 0 22px;
+}
+
+.trigger:hover {
+  background: #ffffff;
+}
+
+.header-tabs {
+  width: 100%;
+  background: #f8f8f8;
+  height: 100%;
+  padding: 5px;
+  margin-right: 10px;
+}
+
 </style>

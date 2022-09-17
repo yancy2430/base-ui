@@ -23,9 +23,7 @@ export default {
       }
     },
     getOs(){
-      var os = require("os");
 
-      console.log(os.networkInterfaces());
     }
   }
 }
