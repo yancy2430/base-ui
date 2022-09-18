@@ -53,7 +53,7 @@
               </upload-pic>
             </a-form-item>
             <a-form-item required label="文章内容" name="content">
-              <rich-text v-model:value="formState.content"/>
+              <td-editor action="/gateway/cms/Article/upload" :height="600" v-model:value="formState.content"></td-editor>
             </a-form-item>
             <a-form-item required label="排序" name="sort">
               <a-input-number v-model:value="formState.sort"/>
@@ -74,7 +74,8 @@
             </upload-pic>
           </a-form-item>
           <a-form-item required label="文章内容" name="content">
-            <rich-text v-if="formState.content" v-model:value="formState.content"/>
+<!--            <rich-text v-if="formState.content" v-model:value="formState.content"/>-->
+            <td-editor action="/gateway/cms/Article/upload" :height="600" v-model:value="formState.content"></td-editor>
           </a-form-item>
           <a-form-item required label="排序" name="sort">
             <a-input-number v-model:value="formState.sort"/>
@@ -93,10 +94,13 @@ import {
   cmsArticleGetById
 } from "@/api/CmsArticle";
 import {cmsArticleCategoryList} from "@/api/CmsArticleCategory";
+import TdEditor from "@/components/TdEditor";
 
 export default {
   name: "CmsArticle",
-  components: {},
+  components: {
+    TdEditor
+  },
   data() {
     return {
       test:"",

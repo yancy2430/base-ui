@@ -165,3 +165,6 @@
 .ant-menu-inline, .ant-menu-vertical, .ant-menu-vertical-left {
   border-right: 0px solid #f0f0f0;
 }
+.ant-card{
+  color: rgba(0,0,0,.65);
+}

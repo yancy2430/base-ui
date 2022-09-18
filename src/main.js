@@ -18,7 +18,6 @@ import {router} from './router'
 import md5 from "md5";
 vue.use(router);
 
-
 import Component from "@zycl/base-component/src/main";
 vue.use(Component)
 
