@@ -1,5 +1,5 @@
 <template>
-  <div class="antv-chart-mini" id="miniProgress">
+  <div id="miniProgress">
   </div>
 </template>
 
@@ -32,7 +32,8 @@ export default {
       xField: 'title',
       xAxis: false,
       yAxis: false,
-      autoFit:false,
+      autoFit:true,
+      height:56,
       padding:-18,
       color: {
         range: '#f0efff',

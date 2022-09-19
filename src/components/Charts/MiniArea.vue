@@ -1,5 +1,5 @@
 <template>
-  <div class="antv-chart-mini" id="container">
+  <div id="MiniArea">
   </div>
 </template>
 
@@ -13,7 +13,7 @@ const beginDay = new Date().getTime()
 for (let i = 0; i < 30; i++) {
   data.push({
     x: moment(new Date(beginDay + 1000 * 60 * 60 * 24 * i)).format('YYYY-MM-DD'),
-    y: Math.round(Math.random() * 10+2)
+    y: Math.round(Math.random() * 10)
   })
 }
 
@@ -27,17 +27,18 @@ export default {
     }
   },
   mounted() {
-    const area = new Area('container', {
+    const area = new Area('MiniArea', {
       data,
       xField: 'x',
       yField: 'y',
       xAxis: false,
       yAxis: false,
-      autoFit:false,
+      autoFit:true,
+      height:56,
       smooth:true,
       padding:-18,
       meta:{
-        range:[0,10]
+        range:[0,100]
       },
       appendPadding:0,
       areaStyle:{
@@ -60,11 +61,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .antv-chart-mini{
-    height: 100%;
-    width: 100%;
-  }
-  /deep/.chart-card-content{
-    margin-bottom: 0;
-  }
+
 </style>

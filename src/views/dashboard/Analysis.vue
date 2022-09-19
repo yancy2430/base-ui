@@ -8,7 +8,7 @@
               <InfoCircleOutlined/>
             </a-tooltip>
           </template>
-          <div>
+          <div style="display: flex;align-items: flex-end;height: 100%">
             <Trend :type="true" term="周同比" :percentage="12" style="margin-right: 16px;">
             </Trend>
             <Trend :type="false" term="日同比" :percentage="11">

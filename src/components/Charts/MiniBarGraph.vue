@@ -1,5 +1,5 @@
 <template>
-  <div class="antv-chart-mini" id="miniBarGraph">
+  <div id="miniBarGraph">
   </div>
 </template>
 
@@ -31,7 +31,8 @@ export default {
       yField: 'y',
       xAxis: false,
       yAxis: false,
-      autoFit:false,
+      autoFit:true,
+      height:56,
       smooth:true,
       padding:-18,
       meta:{
@@ -58,10 +59,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .antv-chart-mini{
-    height: 100%;
-    width: 100%;
-  }
   /deep/.chart-card-content{
     margin-bottom: 0;
   }
