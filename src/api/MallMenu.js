@@ -9,7 +9,7 @@ import {serviceUrl} from '@/utils/request'
 */
 export function mallMenuGetById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallMenu/getById',
+    url: serviceUrl+'/mall/mallMenu/getById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -24,7 +24,7 @@ export function mallMenuGetById (queryParams,options) {
 */
 export function mallMenuSave (data,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallMenu/save',
+    url: serviceUrl+'/mall/mallMenu/save',
     method: 'POST',
     data: JSON.stringify(data),
     headers: {
@@ -40,7 +40,7 @@ export function mallMenuSave (data,options) {
 */
 export function mallMenuRemoveById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallMenu/removeById',
+    url: serviceUrl+'/mall/mallMenu/removeById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -56,7 +56,7 @@ export function mallMenuRemoveById (queryParams,options) {
 */
 export function mallMenuPage (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallMenu/page',
+    url: serviceUrl+'/mall/mallMenu/page',
     method: 'POST',
     params:queryParams,
     headers: {

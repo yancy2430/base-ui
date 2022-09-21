@@ -9,7 +9,7 @@ import {serviceUrl} from '@/utils/request'
 */
 export function mallPayWayGetById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallPayWay/getById',
+    url: serviceUrl+'/mall/mallPayWay/getById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -24,7 +24,7 @@ export function mallPayWayGetById (queryParams,options) {
 */
 export function mallPayWaySave (data,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallPayWay/save',
+    url: serviceUrl+'/mall/mallPayWay/save',
     method: 'POST',
     data: JSON.stringify(data),
     headers: {
@@ -40,7 +40,7 @@ export function mallPayWaySave (data,options) {
 */
 export function mallPayWayRemoveById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallPayWay/removeById',
+    url: serviceUrl+'/mall/mallPayWay/removeById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -56,7 +56,7 @@ export function mallPayWayRemoveById (queryParams,options) {
 */
 export function mallPayWayPage (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallPayWay/page',
+    url: serviceUrl+'/mall/mallPayWay/page',
     method: 'POST',
     params:queryParams,
     headers: {

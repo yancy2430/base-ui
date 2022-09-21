@@ -9,7 +9,7 @@ import {serviceUrl} from '@/utils/request'
 */
 export function mallGoodsCollectGetById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallGoodsCollect/getById',
+    url: serviceUrl+'/mall/mallGoodsCollect/getById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -24,7 +24,7 @@ export function mallGoodsCollectGetById (queryParams,options) {
 */
 export function mallGoodsCollectSave (data,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallGoodsCollect/save',
+    url: serviceUrl+'/mall/mallGoodsCollect/save',
     method: 'POST',
     data: JSON.stringify(data),
     headers: {
@@ -40,7 +40,7 @@ export function mallGoodsCollectSave (data,options) {
 */
 export function mallGoodsCollectRemoveById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallGoodsCollect/removeById',
+    url: serviceUrl+'/mall/mallGoodsCollect/removeById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -56,7 +56,7 @@ export function mallGoodsCollectRemoveById (queryParams,options) {
 */
 export function mallGoodsCollectPage (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallGoodsCollect/page',
+    url: serviceUrl+'/mall/mallGoodsCollect/page',
     method: 'POST',
     params:queryParams,
     headers: {

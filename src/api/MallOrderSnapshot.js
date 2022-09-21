@@ -9,7 +9,7 @@ import {serviceUrl} from '@/utils/request'
 */
 export function mallOrderSnapshotGetById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallOrderSnapshot/getById',
+    url: serviceUrl+'/mall/mallOrderSnapshot/getById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -24,7 +24,7 @@ export function mallOrderSnapshotGetById (queryParams,options) {
 */
 export function mallOrderSnapshotSave (data,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallOrderSnapshot/save',
+    url: serviceUrl+'/mall/mallOrderSnapshot/save',
     method: 'POST',
     data: JSON.stringify(data),
     headers: {
@@ -40,7 +40,7 @@ export function mallOrderSnapshotSave (data,options) {
 */
 export function mallOrderSnapshotRemoveById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallOrderSnapshot/removeById',
+    url: serviceUrl+'/mall/mallOrderSnapshot/removeById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -56,7 +56,7 @@ export function mallOrderSnapshotRemoveById (queryParams,options) {
 */
 export function mallOrderSnapshotPage (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallOrderSnapshot/page',
+    url: serviceUrl+'/mall/mallOrderSnapshot/page',
     method: 'POST',
     params:queryParams,
     headers: {

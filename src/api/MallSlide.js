@@ -9,7 +9,7 @@ import {serviceUrl} from '@/utils/request'
 */
 export function mallSlideGetById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallSlide/getById',
+    url: serviceUrl+'/mall/mallSlide/getById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -24,7 +24,7 @@ export function mallSlideGetById (queryParams,options) {
 */
 export function mallSlideSave (data,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallSlide/save',
+    url: serviceUrl+'/mall/mallSlide/save',
     method: 'POST',
     data: JSON.stringify(data),
     headers: {
@@ -40,7 +40,7 @@ export function mallSlideSave (data,options) {
 */
 export function mallSlideRemoveById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallSlide/removeById',
+    url: serviceUrl+'/mall/mallSlide/removeById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -56,7 +56,7 @@ export function mallSlideRemoveById (queryParams,options) {
 */
 export function mallSlidePage (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallSlide/page',
+    url: serviceUrl+'/mall/mallSlide/page',
     method: 'POST',
     params:queryParams,
     headers: {

@@ -9,7 +9,7 @@ import {serviceUrl} from '@/utils/request'
 */
 export function mallGoodsAttrValueGetById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallGoodsAttrValue/getById',
+    url: serviceUrl+'/mall/mallGoodsAttrValue/getById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -24,7 +24,7 @@ export function mallGoodsAttrValueGetById (queryParams,options) {
 */
 export function mallGoodsAttrValueSave (data,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallGoodsAttrValue/save',
+    url: serviceUrl+'/mall/mallGoodsAttrValue/save',
     method: 'POST',
     data: JSON.stringify(data),
     headers: {
@@ -40,7 +40,7 @@ export function mallGoodsAttrValueSave (data,options) {
 */
 export function mallGoodsAttrValueRemoveById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallGoodsAttrValue/removeById',
+    url: serviceUrl+'/mall/mallGoodsAttrValue/removeById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -56,7 +56,7 @@ export function mallGoodsAttrValueRemoveById (queryParams,options) {
 */
 export function mallGoodsAttrValuePage (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallGoodsAttrValue/page',
+    url: serviceUrl+'/mall/mallGoodsAttrValue/page',
     method: 'POST',
     params:queryParams,
     headers: {

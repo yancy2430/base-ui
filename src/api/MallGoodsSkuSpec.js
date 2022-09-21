@@ -9,7 +9,7 @@ import {serviceUrl} from '@/utils/request'
 */
 export function mallGoodsSkuSpecGetById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallGoodsSkuSpec/getById',
+    url: serviceUrl+'/mall/mallGoodsSkuSpec/getById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -24,7 +24,7 @@ export function mallGoodsSkuSpecGetById (queryParams,options) {
 */
 export function mallGoodsSkuSpecSave (data,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallGoodsSkuSpec/save',
+    url: serviceUrl+'/mall/mallGoodsSkuSpec/save',
     method: 'POST',
     data: JSON.stringify(data),
     headers: {
@@ -40,7 +40,7 @@ export function mallGoodsSkuSpecSave (data,options) {
 */
 export function mallGoodsSkuSpecRemoveById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallGoodsSkuSpec/removeById',
+    url: serviceUrl+'/mall/mallGoodsSkuSpec/removeById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -56,7 +56,7 @@ export function mallGoodsSkuSpecRemoveById (queryParams,options) {
 */
 export function mallGoodsSkuSpecPage (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallGoodsSkuSpec/page',
+    url: serviceUrl+'/mall/mallGoodsSkuSpec/page',
     method: 'POST',
     params:queryParams,
     headers: {

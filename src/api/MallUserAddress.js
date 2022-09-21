@@ -9,7 +9,7 @@ import {serviceUrl} from '@/utils/request'
 */
 export function mallUserAddressGetById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallUserAddress/getById',
+    url: serviceUrl+'/mall/mallUserAddress/getById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -24,7 +24,7 @@ export function mallUserAddressGetById (queryParams,options) {
 */
 export function mallUserAddressSave (data,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallUserAddress/save',
+    url: serviceUrl+'/mall/mallUserAddress/save',
     method: 'POST',
     data: JSON.stringify(data),
     headers: {
@@ -40,7 +40,7 @@ export function mallUserAddressSave (data,options) {
 */
 export function mallUserAddressRemoveById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallUserAddress/removeById',
+    url: serviceUrl+'/mall/mallUserAddress/removeById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -56,7 +56,7 @@ export function mallUserAddressRemoveById (queryParams,options) {
 */
 export function mallUserAddressPage (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/tongdao/mallUserAddress/page',
+    url: serviceUrl+'/mall/mallUserAddress/page',
     method: 'POST',
     params:queryParams,
     headers: {

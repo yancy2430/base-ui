@@ -56,8 +56,6 @@
 import {UserOutlined, LockOutlined, SafetyCertificateOutlined} from '@ant-design/icons-vue';
 import {sysUserLogin, sysUserValidationCode} from "@/api/SysUser";
 import storage from 'store'
-import {auth} from "@/main";
-import md5 from 'md5'
 
 export default {
   name: "Login",

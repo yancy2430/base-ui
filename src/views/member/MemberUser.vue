@@ -50,7 +50,7 @@
                     </a-form-item>
             </template>
             <template #Columns>
-                    <a-table-column title="UID" data-index="id" align="center" :sorter="true" />
+                    <a-table-column title="MID" data-index="id" align="center" :sorter="true" />
                     <a-table-column title="头像" data-index="avatar" align="center">
                       <template #default="{record}">
                         <a-image
