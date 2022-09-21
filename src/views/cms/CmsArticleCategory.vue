@@ -1,7 +1,7 @@
 <template>
     <section>
         <td-table
-                title=""
+                title="文章分类"
                 ref="table"
                 defaultExpandAllRows
                 childrenColumnName

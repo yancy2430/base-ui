@@ -64,3 +64,19 @@ export function mallGoodsCatePage (queryParams,options) {
     }
     },options))
 }
+
+/**
+ * 所有列表
+ * @param queryParams 参数对象
+ * @param options ajax其他参数
+*/
+export function mallGoodsCateList (queryParams,options) {
+    return request(Object.assign({
+    url: serviceUrl+'/mall/mallGoodsCate/list',
+    method: 'POST',
+    params:queryParams,
+    headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    }
+    },options))
+}
