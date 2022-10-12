@@ -3,7 +3,7 @@
     <td-table
         title="发送列表"
         ref="table"
-        :add-item-ok="parameter=>smsSendSendBody(parameter)"
+        :add-item-ok="parameter=>smsSendSendParam(parameter)"
         :data-source="parameter=>smsSendPage(parameter)">
       <template #Search="{formState}">
         <a-form-item label="签名编号" name="orderId">
@@ -24,15 +24,18 @@
       </template>
       <template #AddItem="{formState}">
         <div style="width: 520px;margin-right: 80px">
-          <a-form-item label="发送模板" name="templateCode">
+          <a-form-item label="选择模板" name="templateCode">
             <td-select ref="smsTemplateList" :showSearch="true" :data-source="searchValue=>smsTemplateList()"
                        field-value="templateCode"
                        field-name="templateName"
                        @change="onSelectTemplate($event,formState)"
                        v-model:value="formState.templateCode"/>
           </a-form-item>
-          <a-form-item label="发送内容" name="param">
-            <a-textarea :auto-size="{ minRows: 4 }" v-model:value="formState.param"/>
+          <a-form-item label="内容模板" name="template" style="display: none">
+            <a-textarea disabled :auto-size="{ minRows: 3 }" v-model:value="formState.template"/>
+          </a-form-item>
+          <a-form-item label="发送内容" name="content">
+            <a-textarea :auto-size="{ minRows: 3 }" v-model:value="formState.content"/>
           </a-form-item>
           <a-form-item label="签名" name="signName">
             <td-select :showSearch="true" :data-source="searchValue=>smsSignList()"
@@ -51,7 +54,7 @@
 
 <script>
 
-import {smsSendPage, smsSendSendBody} from "@/api/SmsSend";
+import {smsSendPage, smsSendSendParam} from "@/api/SmsSend";
 import {smsSignList} from "@/api/SmsSign";
 import {smsTemplateList} from "@/api/SmsTemplate";
 
@@ -61,7 +64,7 @@ export default {
     return {
       smsSignList,
       smsSendPage,
-      smsSendSendBody,
+      smsSendSendParam,
       smsTemplateList
     }
   },
@@ -72,7 +75,8 @@ export default {
       let data = this.$refs.smsTemplateList.getData().find(function (item) {
         return item.templateCode === value
       })
-      formState.param = data.templateContent
+      formState.content = data.templateContent
+      formState.template = data.templateContent
     }
   }
 }

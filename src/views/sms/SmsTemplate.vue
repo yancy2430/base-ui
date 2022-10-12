@@ -16,7 +16,6 @@
         </a-form-item>
       </template>
       <template #Columns>
-        <a-table-column title="模板编号" data-index="orderId" :sorter="true" />
         <a-table-column title="模板名称" data-index="templateName"  />
         <a-table-column title="模板代码" data-index="templateCode"  />
         <a-table-column title="审核状态" data-index="auditStatus" :sorter="true" />
