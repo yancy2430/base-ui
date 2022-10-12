@@ -24,7 +24,7 @@
       </template>
       <template #AddItem="{formState}">
         <div style="width: 520px;margin-right: 80px">
-          <a-form-item label="选择模板" name="templateCode">
+          <a-form-item label="选择模板" name="templateCode" required>
             <td-select ref="smsTemplateList" :showSearch="true" :data-source="searchValue=>smsTemplateList()"
                        field-value="templateCode"
                        field-name="templateName"
@@ -34,16 +34,16 @@
           <a-form-item label="内容模板" name="template" style="display: none">
             <a-textarea disabled :auto-size="{ minRows: 3 }" v-model:value="formState.template"/>
           </a-form-item>
-          <a-form-item label="发送内容" name="content">
+          <a-form-item label="发送内容" name="content" extra="提醒：发送前请替换${}变量为需要发送的内容" required>
             <a-textarea :auto-size="{ minRows: 3 }" v-model:value="formState.content"/>
           </a-form-item>
-          <a-form-item label="签名" name="signName">
+          <a-form-item label="签名" name="signName" required>
             <td-select :showSearch="true" :data-source="searchValue=>smsSignList()"
                        field-value="signName"
                        field-name="signName"
                        v-model:value="formState.signName"/>
           </a-form-item>
-          <a-form-item label="接收人" name="phoneNumbers">
+          <a-form-item label="接收人" name="phoneNumbers" required>
             <a-select mode="tags" :token-separators="[',',';','|']" v-model:value="formState.phoneNumbers"/>
           </a-form-item>
         </div>
