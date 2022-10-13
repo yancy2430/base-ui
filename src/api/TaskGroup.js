@@ -3,13 +3,13 @@ import {serviceUrl} from '@/utils/request'
 
 
 /**
- * 
+ * 获取
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
-export function smsSignPage (queryParams,options) {
+export function taskGroupGetById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/sms/Sign/page',
+    url: serviceUrl+'/task/Group/getById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -19,13 +19,28 @@ export function smsSignPage (queryParams,options) {
 }
 
 /**
- * 
+ * 保存或更新
+ * @param data body对象
+*/
+export function taskGroupSave (data,options) {
+    return request(Object.assign({
+    url: serviceUrl+'/task/Group/save',
+    method: 'POST',
+    data: JSON.stringify(data),
+    headers: {
+    'Content-Type': 'application/json'
+    }
+    },options))
+}
+
+/**
+ * 删除
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
-export function smsSignSave (queryParams,options) {
+export function taskGroupRemoveById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/sms/Sign/save',
+    url: serviceUrl+'/task/Group/removeById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -35,13 +50,13 @@ export function smsSignSave (queryParams,options) {
 }
 
 /**
- * 
+ * 列表
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
-export function smsSignDelete (queryParams,options) {
+export function taskGroupPage (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/sms/Sign/delete',
+    url: serviceUrl+'/task/Group/page',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -51,11 +66,11 @@ export function smsSignDelete (queryParams,options) {
 }
 
 /**
- * 
+ * 列表
 */
-export function smsSignList (options) {
+export function taskGroupList (options) {
     return request(Object.assign({
-    url: serviceUrl+'/sms/Sign/list',
+    url: serviceUrl+'/task/Group/list',
     method: 'POST',
     headers: {
     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'

@@ -1,26 +1,33 @@
 <template>
   <section>
     <td-table
-        title="发送列表"
+        title="短信记录"
         ref="table"
-        :add-item-ok="parameter=>smsSendSendParam(parameter)"
-        :data-source="parameter=>smsSendPage(parameter)">
+        :get-item-by-id="parameter=>smsRecordGetById(parameter)"
+        :add-item-ok="parameter=>smsRecordSend(parameter)"
+        :data-source="parameter=>smsRecordPage(parameter)">
       <template #Search="{formState}">
-        <a-form-item label="签名编号" name="orderId">
-          <a-input-number v-model:value="formState.orderId"/>
+        <a-form-item label="发送状态" name="status">
+          <a-input v-model:value="formState.status"/>
         </a-form-item>
-        <a-form-item label="审核状态" name="auditStatus">
-          <a-input v-model:value="formState.auditStatus"/>
+        <a-form-item label="模板代码" name="templateCode">
+          <a-input v-model:value="formState.templateCode"/>
         </a-form-item>
-        <a-form-item label="签名名称" name="templateName">
-          <a-input v-model:value="formState.templateName"/>
+        <a-form-item label="签名" name="signName">
+          <a-input v-model:value="formState.signName"/>
+        </a-form-item>
+        <a-form-item label="接收手机号" name="phone">
+          <a-input v-model:value="formState.phone"/>
         </a-form-item>
       </template>
       <template #Columns>
-        <a-table-column title="模板编号" data-index="orderId" :sorter="true"/>
-        <a-table-column title="签名名称" data-index="signName"/>
-        <a-table-column title="审核状态" data-index="auditStatus" :sorter="true"/>
-        <a-table-column title="创建时间" data-index="createDate" :sorter="true"/>
+        <a-table-column title="发送ID" data-index="id" align="center" :sorter="true"/>
+        <a-table-column title="发送状态" data-index="status" align="center"/>
+        <a-table-column title="发送时间" data-index="sendTime" align="center"/>
+        <a-table-column title="模板代码" data-index="templateCode" align="center"/>
+        <a-table-column title="签名" data-index="signName" align="center"/>
+        <a-table-column title="内容" data-index="content" align="center"/>
+        <a-table-column title="接收手机号" data-index="phone" align="center"/>
       </template>
       <template #AddItem="{formState}">
         <div style="width: 520px;margin-right: 80px">
@@ -31,9 +38,6 @@
                        @change="onSelectTemplate($event,formState)"
                        v-model:value="formState.templateCode"/>
           </a-form-item>
-          <a-form-item label="内容模板" name="template" style="display: none">
-            <a-textarea disabled :auto-size="{ minRows: 3 }" v-model:value="formState.template"/>
-          </a-form-item>
           <a-form-item label="发送内容" name="content" extra="提醒：发送前请替换${}变量为需要发送的内容" required>
             <a-textarea :auto-size="{ minRows: 3 }" v-model:value="formState.content"/>
           </a-form-item>
@@ -43,29 +47,33 @@
                        field-name="signName"
                        v-model:value="formState.signName"/>
           </a-form-item>
-          <a-form-item label="接收人" name="phoneNumbers" required>
-            <a-select mode="tags" :token-separators="[',',';','|']" v-model:value="formState.phoneNumbers"/>
+          <a-form-item label="接收人" name="phone" required>
+            <a-input v-model:value="formState.phone"/>
           </a-form-item>
         </div>
+      </template>
+      <template #Action="{formState}">
+        <a-button type="link">重发</a-button>
       </template>
     </td-table>
   </section>
 </template>
 
 <script>
-
-import {smsSendPage, smsSendSendParam} from "@/api/SmsSend";
+import {smsRecordPage, smsRecordSend, smsRecordGetById} from "@/api/SmsRecord";
 import {smsSignList} from "@/api/SmsSign";
 import {smsTemplateList} from "@/api/SmsTemplate";
 
 export default {
-  name: "SmsTemplate",
+  name: "SmsRecord",
+  components: {},
   data() {
     return {
       smsSignList,
-      smsSendPage,
-      smsSendSendParam,
-      smsTemplateList
+      smsTemplateList,
+      smsRecordPage,
+      smsRecordSend,
+      smsRecordGetById
     }
   },
   created() {
@@ -76,7 +84,6 @@ export default {
         return item.templateCode === value
       })
       formState.content = data.templateContent
-      formState.template = data.templateContent
     }
   }
 }
