@@ -5,43 +5,21 @@
             @finish="onOk"
             :model="formState"
             layout="vertical">
-      <a-form-item
-          name="createTime"
-          label="发现时间"
-
-          :rules="[{ required: true, message: '发现时间不能为空!' }]"
-      >
-        <a-date-picker valueFormat="YYYY-MM-DD HH:mm:ss" format="YYYY-MM-DD HH:mm:ss" v-model:value="formState.createTime" inputReadOnly style="width: 100%" size="large" placeholder="选择时间" />
+      <a-form-item name="result" label="处理结果"
+                   :rules="[{ required: true, message: '处理结果不能为空!' }]">
+        <a-textarea  size="large" v-model:value="formState.result"/>
       </a-form-item>
-      <a-form-item
-          name="address"
-          label="发现地点"
-          :rules="[{ required: true, message: '发现地点不能为空!' }]"
-      >
-        <a-input  size="large" v-model:value="formState.address"/>
-      </a-form-item>
-      <a-form-item name="issue" label="存在的问题"
-                   :rules="[{ required: true, message: '存在的问题不能为空!' }]">
-        <a-textarea  size="large" v-model:value="formState.issue"/>
-      </a-form-item>
-      <a-form-item name="images">
-        <UploadPicList action="/gateway/cms/Article/upload" v-model:value="formState.images">
+      <a-form-item name="resultImages">
+        <UploadPicList action="/gateway/cms/Article/upload" v-model:value="formState.resultImages">
         </UploadPicList>
       </a-form-item>
       <a-form-item
-          name="points"
-          label="扣分"
-          :rules="[{ required: true, message: '扣分不能为空!' }]"
-      >
-        <a-input-number style="width: 100%;"  size="large" v-model:value="formState.points"/>
-      </a-form-item>
-      <a-form-item
-          name="monitorSign"
-          label="问题发现者（签名）"
+          name="handlerSign"
+          label="处理人（签名）"
           extra="请在上面👆🏻灰色框内手写签名"
           :rules="[{ required: true, message: '签名不能为空!' }]"
       >
-        <survey-pad ref="signature" v-model:value="formState.monitorSign" />
+        <survey-pad ref="signature" v-model:value="formState.handlerSign" />
       </a-form-item>
       <a-form-item>
         <a-button type="primary" size="large" class="ant-btn-wp" html-type="submit" :loading="visible"
@@ -55,9 +33,9 @@
 <script>
 import {defineComponent, getCurrentInstance, reactive, ref, toRaw} from 'vue';
 import SurveyPad from "@/views/survey/app/SurveyPad";
-import {surveyContentSave} from "@/api/SurveyContent";
+import {surveyContentGetById, surveyContentSave} from "@/api/SurveyContent";
 import {message} from 'ant-design-vue';
-import {useRouter} from 'vue-router'
+import {useRoute, useRouter} from 'vue-router'
 
 export default defineComponent({
   name: "SurveyFrom",
@@ -65,7 +43,9 @@ export default defineComponent({
     SurveyPad
   },
   setup() {
+    const survey = ref(false);
     const router = useRouter()
+    const route = useRoute()
     const formRef = ref();
     const visible = ref(false);
     const formState = reactive({
@@ -76,7 +56,7 @@ export default defineComponent({
     }
     const onOk = () => {
       formRef.value.validateFields().then(values => {
-        surveyContentSave(values).then(res=>{
+        surveyContentSave(Object.assign(values,{id:route.query.id})).then(res=>{
           if (res.code === 200) {
             ctx.$refs.signature.clearSignature()
             formRef.value.resetFields();
@@ -93,6 +73,7 @@ export default defineComponent({
       });
     };
     return {
+      survey,
       clearSignature,
       formState,
       formRef,

@@ -9,9 +9,15 @@
                 :delete-item-ok="parameter=>surveyContentRemoveById(parameter)"
                 :data-source="parameter=>surveyContentPage(parameter)">
             <template #Search="{formState}">
-                    <a-form-item label="状态" name="status">
-                            <a-input v-model:value="formState.status"/>
-                    </a-form-item>
+              <a-form-item label="状态" name="status">
+                <a-input v-model:value="formState.status"/>
+              </a-form-item>
+              <a-form-item label="地点" name="address">
+                <a-input v-model:value="formState.address"/>
+              </a-form-item>
+              <a-form-item label="问题" name="issue">
+                <a-input v-model:value="formState.issue"/>
+              </a-form-item>
             </template>
             <template #Columns>
                     <a-table-column title="ID" data-index="id" align="center" :sorter="true" />
@@ -22,13 +28,12 @@
                     <a-table-column title="处理结果" data-index="result" align="center"  />
                     <a-table-column title="扣分" data-index="points" align="center" :sorter="true" />
                     <a-table-column title="领导签字" data-index="leadSign" align="center"  />
-                    <a-table-column title="领导签字时间" data-index="leadSignTime" align="center"  />
-                    <a-table-column title="监察签字" data-index="monitorSign" align="center"  />
-                    <a-table-column title="监察签字时间" data-index="monitorSignTime" align="center"  />
+                    <a-table-column title="监察签字" data-index="monitorSign" align="center">
+                      <template #default="{record}">
+                        <a-image :src="record.monitorSign"/>
+                      </template>
+                    </a-table-column>
                     <a-table-column title="状态" data-index="status" align="center"  />
-                    <a-table-column title="操作用户" data-index="createMemberId" align="center" :sorter="true" />
-                    <a-table-column title="领导ID" data-index="leadMemberId" align="center" :sorter="true" />
-                    <a-table-column title="监察ID" data-index="monitorMemberId" align="center" :sorter="true" />
             </template>
         </td-table>
     </section>

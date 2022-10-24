@@ -55,6 +55,11 @@ export const constantRouterMap = [
                 path: '/survey/app/list',
                 name: 'SurveyList',
                 component: () => import(/* webpackChunkName: "user" */ '@/views/survey/app/SurveyList')
+            },
+            {
+                path: '/survey/app/dispose',
+                name: 'SurveyDispose',
+                component: () => import(/* webpackChunkName: "user" */ '@/views/survey/app/SurveyDispose')
             }
         ]
     },
