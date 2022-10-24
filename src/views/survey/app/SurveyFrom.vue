@@ -1,7 +1,6 @@
 <template>
   <section class="wp" style="margin: 18px">
     <a-form ref="formRef"
-
             autocomplete="off"
             @finish="onOk"
             :model="formState"
@@ -25,8 +24,8 @@
         <a-textarea  size="large" v-model:value="formState.issue"/>
       </a-form-item>
       <a-form-item name="resources">
-        <upload-pic action="/gateway/cms/Article/upload" v-model:value="formState.image">
-        </upload-pic>
+        <UploadPicList action="/gateway/cms/Article/upload" v-model:value="formState.image">
+        </UploadPicList>
       </a-form-item>
       <a-form-item
           name="points"
@@ -46,6 +45,10 @@
             style="border: 1px solid #d9d9d9;background: #e8e3e2;width: 100%"
             :height="200"
             v-model:value="formState.sign"
+            saveType="image/svg+xml"
+            @input="saveOutput"
+            saveOutput="data_url"
+            :modelValue="formState.sign"
             ref="signaturePad"
         >
         </signature-pad>
@@ -72,12 +75,10 @@ export default defineComponent({
     const formRef = ref();
     const visible = ref(false);
     const formState = reactive({
-      title: '',
-      description: '',
-      modifier: 'public',
     });
 
     const onOk = () => {
+      console.log('Received values of form: ', formState);
       formRef.value.validateFields().then(values => {
         console.log('Received values of form: ', values);
         console.log('formState: ', toRaw(formState));
@@ -88,8 +89,11 @@ export default defineComponent({
         console.log('Validate Failed:', info);
       });
     };
-
+    const saveOutput = (value) => {
+      console.log(formState.sign)
+    }
     return {
+      saveOutput,
       formState,
       formRef,
       visible,
