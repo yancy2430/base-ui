@@ -65,6 +65,7 @@
               <a-radio-group v-model:value="treeValue.type">
                 <a-radio :value="0">边栏菜单</a-radio>
                 <a-radio :value="1">操作内页</a-radio>
+                <a-radio :value="2">前端页面</a-radio>
               </a-radio-group>
             </a-form-item>
             <a-form-item label="标题">
