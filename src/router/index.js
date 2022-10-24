@@ -1,5 +1,6 @@
-import { UserLayout} from '@/layouts'
+import {BlankLayout, UserLayout} from '@/layouts'
 import {createRouter, createWebHistory} from 'vue-router'
+import Survey from "@/views/survey/app/Survey";
 
 
 /**
@@ -36,6 +37,24 @@ export const constantRouterMap = [
                 path: 'recover',
                 name: 'recover',
                 component: undefined
+            }
+        ]
+    },
+    {
+        path: '/survey/app',
+        component: Survey,
+        redirect: '/survey/app/from',
+        hidden: true,
+        children: [
+            {
+                path: '/survey/app/from',
+                name: 'SurveyFrom',
+                component: () => import(/* webpackChunkName: "user" */ '@/views/survey/app/SurveyFrom')
+            },
+            {
+                path: '/survey/app/list',
+                name: 'SurveyList',
+                component: () => import(/* webpackChunkName: "user" */ '@/views/survey/app/SurveyList')
             }
         ]
     },

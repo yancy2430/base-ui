@@ -27,13 +27,13 @@ module.exports = {
         // If you want to turn on the proxy, please remove the mockjs /src/main.jsL11
         proxy: {
             "/gateway/": {
-                target: "http://localhost:8080",
+                target: "http://localhost:10000",
                 ws: false,
                 changeOrigin: true,
                 pathRewrite: {"^/gateway": "/"}
             },
             "/upload/": {
-                target: "http://localhost:8080",
+                target: "http://localhost:10000",
             }
         }
     },
