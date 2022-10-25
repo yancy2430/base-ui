@@ -12,6 +12,7 @@
     "@ant-design/icons-vue": "^6.0.1",
     "@antv/data-set": "^0.11.8",
     "@antv/g2plot": "^2.4.20",
+    "@lucky-canvas/vue": "^0.1.11",
     "@tinymce/tinymce-vue": "^4",
     "@vueup/vue-quill": "^1.0.0-beta.8",
     "@zycl/base-component": "^1.4.9",

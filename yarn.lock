@@ -1397,6 +1397,15 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
+"@lucky-canvas/vue@^0.1.11":
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/@lucky-canvas/vue/-/vue-0.1.11.tgz#79d79d1a07b71c572080e638bb78d8636d8d759d"
+  integrity sha512-5vm0txSKRBtMgrE/HZEvw1joSTx9NTdAkc8tBp/aX0LxyhQtiTVBLsRgdYUK/OiURCL8bo+046BTGnV+Q4JFlg==
+  dependencies:
+    "@vue/composition-api" "^1.0.0"
+    lucky-canvas "^1.7.23"
+    vue-demi "^0.7.4"
+
 "@node-ipc/js-queue@2.0.3":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@node-ipc/js-queue/-/js-queue-2.0.3.tgz#ac7fe33d766fa53e233ef8fedaf3443a01c5a4cd"
@@ -1994,6 +2003,11 @@
   optionalDependencies:
     prettier "^1.18.2 || ^2.0.0"
 
+"@vue/composition-api@^1.0.0":
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/@vue/composition-api/-/composition-api-1.7.1.tgz#aa6831be5a12817d93e89e247460c310dd7a3a32"
+  integrity sha512-xDWoEtxGXhH9Ku3ROYX/rzhcpt4v31hpPU5zF3UeVC/qxA3dChmqU8zvTUYoKh3j7rzpNsoFOwqsWG7XPMlaFA==
+
 "@vue/devtools-api@^6.0.0-beta.11", "@vue/devtools-api@^6.4.5":
   version "6.4.5"
   resolved "https://registry.yarnpkg.com/@vue/devtools-api/-/devtools-api-6.4.5.tgz#d54e844c1adbb1e677c81c665ecef1a2b4bb8380"
@@ -2048,6 +2062,7 @@
   integrity sha512-W9mfWLHmJhkfAmV+7gDjcHeAWALQtgGT3JErxULl0oz6R6+3ug91I7IErs93eCFhPCZPHBs4QJS7YWEV7A3sxw==
 
 "@vue/vue-loader-v15@npm:vue-loader@^15.9.7", vue-loader@^15.9.8:
+  name "@vue/vue-loader-v15"
   version "15.10.0"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-15.10.0.tgz#2a12695c421a2a2cc2138f05a949d04ed086e38b"
   integrity sha512-VU6tuO8eKajrFeBzMssFUP9SvakEeeSi1BxdTH5o3+1yUyrldp8IERkSdXlMI2t4kxF2sqYUDsQY+WJBxzBmZg==
@@ -6146,6 +6161,11 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
+lucky-canvas@^1.7.23:
+  version "1.7.27"
+  resolved "https://registry.yarnpkg.com/lucky-canvas/-/lucky-canvas-1.7.27.tgz#ce4689e99aa1945d981f0489304f5f3c1789023d"
+  integrity sha512-Ftz6qD+863bI7xijBmZg3dw3cNEc7odPr70EZQcGA14y3TgTAzH65HPosOCd6kKUlMwhntBaHMx3onoj9MtJRQ==
+
 magic-string@^0.25.7:
   version "0.25.9"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.25.9.tgz#de7f9faf91ef8a1c91d02c2e5314c8277dbcdd1c"
@@ -8842,6 +8862,11 @@ viser@^2.0.0:
     "@types/node" "^8.0.53"
     d3-format "^1.3.0"
     lodash "^4.17.4"
+
+vue-demi@^0.7.4:
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.7.5.tgz#88dee7492fc99a0f911ff03fc02c658fa2a79af8"
+  integrity sha512-eFSQSvbQdY7C9ujOzvM6tn7XxwLjn0VQDXQsiYBLBwf28Na+2nTQR4BBBcomhmdP6mmHlBKAwarq6a0BPG87hQ==
 
 vue-eslint-parser@^8.0.1:
   version "8.3.0"

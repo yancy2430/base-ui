@@ -3,13 +3,13 @@ import {serviceUrl} from '@/utils/request'
 
 
 /**
- * 列表
+ * 获取奖品表
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
-export function apiPage (queryParams,options) {
+export function lotteryPrizeGetById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/video/page',
+    url: serviceUrl+'/lottery/Prize/getById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -19,13 +19,28 @@ export function apiPage (queryParams,options) {
 }
 
 /**
- * 
+ * 保存或更新奖品表
+ * @param data body对象
+*/
+export function lotteryPrizeSave (data,options) {
+    return request(Object.assign({
+    url: serviceUrl+'/lottery/Prize/save',
+    method: 'POST',
+    data: JSON.stringify(data),
+    headers: {
+    'Content-Type': 'application/json'
+    }
+    },options))
+}
+
+/**
+ * 删除奖品表
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
-export function apiDetail (queryParams,options) {
+export function lotteryPrizeRemoveById (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/video/detail',
+    url: serviceUrl+'/lottery/Prize/removeById',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -35,42 +50,13 @@ export function apiDetail (queryParams,options) {
 }
 
 /**
- * 
+ * 奖品表列表
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
-export function apiDanmaku (queryParams,options) {
+export function lotteryPrizePage (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/video/danmaku',
-    method: 'POST',
-    params:queryParams,
-    headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-    }
-    },options))
-}
-
-/**
- * 
-*/
-export function apiDetail (options) {
-    return request(Object.assign({
-    url: serviceUrl+'/video/{id}.m3u8',
-    method: 'POST',
-    headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-    }
-    },options))
-}
-
-/**
- * 
- * @param queryParams 参数对象
- * @param options ajax其他参数
-*/
-export function apiPic (queryParams,options) {
-    return request(Object.assign({
-    url: serviceUrl+'/video/pic',
+    url: serviceUrl+'/lottery/Prize/page',
     method: 'POST',
     params:queryParams,
     headers: {
