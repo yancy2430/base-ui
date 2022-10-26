@@ -1,6 +1,6 @@
 <template>
   <a-layout style="height: 100vh;">
-    <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible
+    <a-layout-sider v-if="isMobile()" v-model:collapsed="collapsed" :trigger="null" collapsible
                     :collapsedWidth="70">
       <div class="main-logo">
         <img style="width: 100%;height: 100%;" src="~@/assets/logo.svg" class="logo" alt="logo">
@@ -146,7 +146,12 @@ export default defineComponent({
       storage.remove("ACCESS_TOKEN")
       this.$router.replace("/user/login")
     }
-
+    const isMobile= ()=>{
+      console.log("isMobile")
+      let flag = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i);
+      console.log(flag)
+      return !flag;
+    }
     return {
       ...toRefs(state),
       userInfo,
@@ -155,7 +160,8 @@ export default defineComponent({
       onOpenChange,
       logOut,
       onSelect,
-      onReload
+      onReload,
+      isMobile
     };
   },
 

@@ -13,7 +13,7 @@ export const constantRouterMap = [
         name: 'index',
         path: '/',
         component: 'BasicLayout',
-        redirect: '/dashboard/analysis',
+        redirect: '/survey/app/SurveyList',
         meta: { title: '首页', keepAlive: true },
         children: []
     },

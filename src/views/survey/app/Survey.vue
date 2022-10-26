@@ -6,10 +6,10 @@
           <a-button>问题菜单</a-button>
           <template #overlay>
             <a-menu>
-              <a-menu-item @click="toPath('/survey/app/list')">
+              <a-menu-item @click="toPath('/survey/app/SurveyList')">
                 问题列表
               </a-menu-item>
-              <a-menu-item @click="toPath('/survey/app/from')">
+              <a-menu-item @click="toPath('/survey/app/SurveyFrom')">
                 问题录入
               </a-menu-item>
             </a-menu>
@@ -17,7 +17,9 @@
         </a-dropdown>
       </template>
     </a-card>
-    <router-view />
+    <a-card>
+      <router-view />
+    </a-card>
   </section>
 </template>
 

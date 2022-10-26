@@ -10,7 +10,7 @@
 
           <span>
 <!--            <component :is="'StarOutlined'" style="margin-right: 8px"/>-->
-            <a-button v-if="!item.result" @click="toDispose('/survey/app/dispose',item.id)" type="primary">处理</a-button>
+            <a-button v-if="!item.result" @click="toDispose('/survey/app/SurveyDispose',item.id)" type="primary">处理</a-button>
           </span>
         </template>
         <a-list-item-meta>

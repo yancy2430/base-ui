@@ -104,7 +104,7 @@ export default {
           if (result.code === 200) {
             storage.set("ACCESS_TOKEN",result.data)
             this.$message.success(result.msg)
-            this.$router.replace("/dashboard/analysis")
+            this.$router.replace("/survey/app/SurveyList")
           }else {
             this.getValidationCode()
             this.$message.error(result.msg)
@@ -117,7 +117,6 @@ export default {
       }).catch(err => {
         console.log('error', err);
       });
-
     }
   }
 }

@@ -14,7 +14,7 @@ const constantRouterComponents = {
   '500': () => import(/* webpackChunkName: "error" */ '@/exception/500'),
   // 你需要动态引入的页面组件
   // 'Workplace': () => import('@/views/dashboard/Workplace'),
-  // 'Analysis': () => import('@/views/dashboard/Analysis'),
+  // 'Analysis': () => import('@/views/survey/app/SurveyList'),
 
 }
 
@@ -29,7 +29,7 @@ const rootRouter = {
   name: 'index',
   path: '/',
   component: 'BasicLayout',
-  redirect: '/dashboard/analysis',
+  redirect: '/survey/app/SurveyList',
   meta: { title: '首页', keepAlive: true },
   children: [
   ]
