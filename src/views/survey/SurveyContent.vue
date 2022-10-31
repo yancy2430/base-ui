@@ -26,7 +26,7 @@
                     <a-table-column title="存在问题" data-index="issue" align="center"  />
                     <a-table-column title="存在问题图片" data-index="monitorSign" align="center">
                       <template #default="{record}">
-                        <a-image :src="record.images[0]"/>
+                        <a-image v-if="record.images" :src="record.images[0]"/>
                       </template>
                     </a-table-column>
                     <a-table-column title="处理方式" data-index="handling" align="center"  />
