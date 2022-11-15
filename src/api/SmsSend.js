@@ -3,7 +3,7 @@ import {serviceUrl} from '@/utils/request'
 
 
 /**
- * 
+ * 短信发送
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
@@ -19,7 +19,7 @@ export function smsSendSendBody (queryParams,options) {
 }
 
 /**
- * 
+ * 发送短信
  * @param data body对象
 */
 export function smsSendSendParam (data,options) {

@@ -3,13 +3,13 @@ import {serviceUrl} from '@/utils/request'
 
 
 /**
- * 列表
+ * 管理员登录
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
-export function apiPage (queryParams,options) {
+export function storeLoginLogin (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/video/page',
+    url: serviceUrl+'/store/login/login',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -19,13 +19,13 @@ export function apiPage (queryParams,options) {
 }
 
 /**
- * 视频详情
+ * 注册用户
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
-export function apiDetail (queryParams,options) {
+export function storeLoginRegister (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/video/detail',
+    url: serviceUrl+'/store/login/register',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -35,13 +35,26 @@ export function apiDetail (queryParams,options) {
 }
 
 /**
- * 弹幕列表
+ * 验证码
+*/
+export function storeLoginValidationCode (options) {
+    return request(Object.assign({
+    url: serviceUrl+'/store/login/validationCode',
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    }
+    },options))
+}
+
+/**
+ * 获取短信验证码
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
-export function apiDanmaku (queryParams,options) {
+export function storeLoginGetSmsCode (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/video/danmaku',
+    url: serviceUrl+'/store/login/getSmsCode',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -51,15 +64,12 @@ export function apiDanmaku (queryParams,options) {
 }
 
 /**
- * 图片显示
- * @param queryParams 参数对象
- * @param options ajax其他参数
+ * 退出登录
 */
-export function apiPic (queryParams,options) {
+export function storeLoginLogout (options) {
     return request(Object.assign({
-    url: serviceUrl+'/video/pic',
+    url: serviceUrl+'/store/login/logout',
     method: 'POST',
-    params:queryParams,
     headers: {
     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }

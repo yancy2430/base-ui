@@ -9,7 +9,7 @@ import {serviceUrl} from '@/utils/request'
 */
 export function memberRegister (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/survey/api/register',
+    url: serviceUrl+'/member/api/register',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -25,7 +25,7 @@ export function memberRegister (queryParams,options) {
 */
 export function memberLogin (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/survey/api/login',
+    url: serviceUrl+'/member/api/login',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -35,15 +35,12 @@ export function memberLogin (queryParams,options) {
 }
 
 /**
- * 
- * @param queryParams 参数对象
- * @param options ajax其他参数
+ * 用户信息
 */
-export function memberAll (queryParams,options) {
+export function memberUserInfo (options) {
     return request(Object.assign({
-    url: serviceUrl+'/member/all',
+    url: serviceUrl+'/member/api/userInfo',
     method: 'POST',
-    params:queryParams,
     headers: {
     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }

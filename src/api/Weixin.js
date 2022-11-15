@@ -9,7 +9,7 @@ import {serviceUrl} from '@/utils/request'
 */
 export function weixinOnLoginByWx (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/wx/miniapp/onLoginByWx',
+    url: serviceUrl+'/member/api/onLoginByWx',
     method: 'POST',
     params:queryParams,
     headers: {
@@ -19,13 +19,29 @@ export function weixinOnLoginByWx (queryParams,options) {
 }
 
 /**
- * 设置用户信息
+ * 微信设置用户信息
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
 export function weixinSetUserInfo (queryParams,options) {
     return request(Object.assign({
-    url: serviceUrl+'/wx/miniapp/setUserInfo',
+    url: serviceUrl+'/member/api/setUserInfo',
+    method: 'POST',
+    params:queryParams,
+    headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    }
+    },options))
+}
+
+/**
+ * 微信绑定手机号
+ * @param queryParams 参数对象
+ * @param options ajax其他参数
+*/
+export function weixinSetUserPhone (queryParams,options) {
+    return request(Object.assign({
+    url: serviceUrl+'/member/api/setUserPhone',
     method: 'POST',
     params:queryParams,
     headers: {

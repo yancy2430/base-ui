@@ -3,7 +3,7 @@ import {serviceUrl} from '@/utils/request'
 
 
 /**
- * 
+ * 短信分页
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
@@ -19,7 +19,7 @@ export function smsSignPage (queryParams,options) {
 }
 
 /**
- * 
+ * 保存数据
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
@@ -35,7 +35,7 @@ export function smsSignSave (queryParams,options) {
 }
 
 /**
- * 
+ * 删除签名
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
@@ -51,7 +51,7 @@ export function smsSignDelete (queryParams,options) {
 }
 
 /**
- * 
+ * 短信签名列表
 */
 export function smsSignList (options) {
     return request(Object.assign({

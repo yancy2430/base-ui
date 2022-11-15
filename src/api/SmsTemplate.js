@@ -3,7 +3,7 @@ import {serviceUrl} from '@/utils/request'
 
 
 /**
- * 
+ * 短信模板分页
  * @param queryParams 参数对象
  * @param options ajax其他参数
 */
@@ -19,7 +19,7 @@ export function smsTemplatePage (queryParams,options) {
 }
 
 /**
- * 
+ * 获取模板列表
 */
 export function smsTemplateList (options) {
     return request(Object.assign({
